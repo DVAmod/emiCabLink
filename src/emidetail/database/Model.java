@@ -49,10 +49,12 @@ import javafx.collections.ObservableList;
 import org.hibernate.Hibernate;
 
 /**
- *
+ * Model all functions at db utils
  * @author DVAmod
  */
 public class Model extends Observable{
+    
+    public int UID = 1;
     
     public int TRAY_INDEX = 0;
     
