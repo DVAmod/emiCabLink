@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141" fx:controller="emidetail.manager.forms.formReportController">
+   <children>
+      <VBox prefHeight="600.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <SplitPane dividerPositions="0.3862876254180602" orientation="VERTICAL" prefHeight="600.0" prefWidth="600.0">
+              <items>
+                <AnchorPane fx:id="locSelectPane" prefHeight="188.0" prefWidth="583.0" />
+                <AnchorPane fx:id="locReportPane" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                     <children>
+                        <HBox prefHeight="364.0" prefWidth="798.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <ScrollPane prefHeight="364.0" prefWidth="683.0">
+                                <content>
+                                  <AnchorPane fx:id="locPrintPane" minHeight="0.0" minWidth="0.0" prefHeight="583.0" prefWidth="669.0" />
+                                </content>
+                              </ScrollPane>
+                              <ButtonBar centerShape="false" prefHeight="486.0" prefWidth="116.0">
+                                <buttons>
+                                    <VBox>
+                                       <children>
+                                          <Pane prefHeight="222.0" prefWidth="106.0" />
+                                          <Separator prefHeight="13.0" prefWidth="106.0" />
+                                        <Button mnemonicParsing="false" onAction="#handleExport" text="Сохранить " />
+                                          <Separator prefHeight="18.0" prefWidth="106.0" />
+                                          <Button alignment="TOP_LEFT" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#handlePrint" text="На печать" />
+                                       </children>
+                                    </VBox>
+                                </buttons>
+                              </ButtonBar>
+                           </children>
+                        </HBox>
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
