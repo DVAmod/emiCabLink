@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 13.05.2018 18:04:56 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="emidetail.database.beans.Illustration" table="Illustration" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <property name="description" type="string">
+            <column name="description" length="2000000000" />
+        </property>
+        <property name="abbr" type="string">
+            <column name="abbr" length="2000000000" />
+        </property>
+        <property name="imgData" type="binary">
+            <column name="img_data" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

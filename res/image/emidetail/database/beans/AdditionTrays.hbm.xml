@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 04.07.2018 22:46:20 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="emidetail.database.beans.AdditionTrays" table="AdditionTrays" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <property name="articul" type="string">
+            <column name="articul" length="2000000000" not-null="true" />
+        </property>
+        <property name="definition" type="string">
+            <column name="definition" length="2000000000" />
+        </property>
+        <property name="inner" type="string">
+            <column name="inner" length="2000000000" />
+        </property>
+        <property name="thickness" type="string">
+            <column name="thickness" length="2000000000" />
+        </property>
+        <property name="lenth" type="java.lang.Integer">
+            <column name="lenth" />
+        </property>
+        <property name="width1" type="java.lang.Integer">
+            <column name="width1" />
+        </property>
+        <property name="width2" type="java.lang.Integer">
+            <column name="width2" />
+        </property>
+        <property name="height" type="java.lang.Integer">
+            <column name="height" />
+        </property>
+        <property name="mass" type="string">
+            <column name="mass" length="2000000000" />
+        </property>
+        <property name="radius" type="string">
+            <column name="radius" length="2000000000" />
+        </property>
+        <property name="constructionId" type="java.lang.Integer">
+            <column name="construction_id" />
+        </property>
+        <property name="mark" type="string">
+            <column name="mark" length="2000000000" />
+        </property>
+        <property name="type" type="java.lang.Integer">
+            <column name="type" />
+        </property>
+        <property name="coverTypeId" type="java.lang.Integer">
+            <column name="cover_type_id" />
+        </property>
+        <property name="countConnection" type="java.lang.Integer">
+            <column name="count_connection" />
+        </property>
+        <property name="trayTypeId" type="java.lang.Integer">
+            <column name="tray_type_id" />
+        </property>
+    </class>
+</hibernate-mapping>

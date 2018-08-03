@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 13.05.2018 18:04:56 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="emidetail.database.beans.Unit" table="Unit" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <property name="sectionName" type="string">
+            <column name="section_name" length="2000000000" />
+        </property>
+        <property name="claimName" type="string">
+            <column name="claim_name" length="2000000000" />
+        </property>
+        <property name="standNames" type="string">
+            <column name="stand_names" length="2000000000" />
+        </property>
+        <property name="standDouble" type="boolean">
+            <column name="stand_double" />
+        </property>
+        <property name="illustrationId" type="java.lang.Integer">
+            <column name="illustration_id" />
+        </property>
+        <property name="titleDisplay" type="string">
+            <column name="title_display" length="2000000000" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

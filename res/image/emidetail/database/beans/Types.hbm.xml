@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 13.05.2018 18:04:56 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="emidetail.database.beans.Types" table="Types" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <property name="name" type="string">
+            <column name="name" length="2000000000" />
+        </property>
+        <property name="format" type="string">
+            <column name="format" length="2000000000" />
+        </property>
+        <property name="abbr" type="string">
+            <column name="abbr" length="2000000000" />
+        </property>
+        <property name="type" type="string">
+            <column name="type" length="2000000000" />
+        </property>
+    </class>
+</hibernate-mapping>

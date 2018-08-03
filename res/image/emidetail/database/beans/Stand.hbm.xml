@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 23.05.2018 14:40:33 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="emidetail.database.beans.Stand" table="Stand" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <property name="title" type="string">
+            <column name="title" length="2000000000" />
+        </property>
+        <property name="type" type="int">
+            <column name="type" not-null="true" />
+        </property>
+        <property name="typeSpec" type="string">
+            <column name="type_spec" length="2000000000" />
+        </property>
+        <property name="articul" type="string">
+            <column name="articul" length="2000000000" />
+        </property>
+        <property name="description" type="string">
+            <column name="description" length="2000000000" />
+        </property>
+        <property name="abbr" type="string">
+            <column name="abbr" length="2000000000" />
+        </property>
+        <property name="length" type="int">
+            <column name="length" not-null="true" />
+        </property>
+        <property name="width" type="java.lang.Integer">
+            <column name="width" />
+        </property>
+        <property name="height" type="java.lang.Integer">
+            <column name="height" />
+        </property>
+        <property name="constructionId" type="java.lang.Integer">
+            <column name="construction_id" />
+        </property>
+        <property name="mass" type="string">
+            <column name="mass" length="2000000000" />
+        </property>
+        <property name="ths" type="string">
+            <column name="ths" length="2000000000" />
+        </property>
+        <property name="loading" type="string">
+            <column name="loading" length="2000000000" />
+        </property>
+        <property name="perforation" type="string">
+            <column name="perforation" length="2000000000" />
+        </property>
+        <property name="claimType" type="string">
+            <column name="claim_type" length="2000000000" />
+        </property>
+        <property name="classId" type="java.lang.Integer">
+            <column name="class_id" />
+        </property>
+        <property name="profilIds" type="string">
+            <column name="profil_ids" length="2000000000" />
+        </property>
+        <property name="illustrationId" type="java.lang.Integer">
+            <column name="illustration_id" />
+        </property>
+        <property name="profilStr" type="string">
+            <column name="profil_str" length="2000000000" />
+        </property>
+        <property name="metisCount" type="java.lang.Integer">
+            <column name="metis_count" />
+        </property>
+        <property name="metis" type="string">
+            <column name="metis" length="2000000000" />
+        </property>
+        <property name="metisId" type="java.lang.Integer">
+            <column name="metis_id" />
+        </property>
+        <property name="classStr" type="string">
+            <column name="class_str" length="2000000000" />
+        </property>
+        <property name="lengthStr" type="string">
+            <column name="length_str" length="2000000000" />
+        </property>
+        <property name="widthStr" type="string">
+            <column name="width_str" length="2000000000" />
+        </property>
+        <property name="heightStr" type="string">
+            <column name="height_str" length="2000000000" />
+        </property>
+        <property name="thsStr" type="string">
+            <column name="ths_str" length="2000000000" />
+        </property>
+    </class>
+</hibernate-mapping>

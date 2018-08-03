@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 04.07.2018 22:46:20 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="emidetail.database.beans.LinkTrays" table="LinkTrays" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <property name="traysType" type="string">
+            <column name="trays_type"  />
+        </property>
+        <property name="coverType" type="int">
+            <column name="cover_type"  />
+        </property>
+        <property name="title" type="string">
+            <column name="title" length="2000000000" />
+        </property>
+        <property name="count" type="java.lang.Integer">
+            <column name="count" />
+        </property>
+        <property name="isFixed" type="boolean">
+            <column name="isFixed" />
+        </property>
+        <property name="isHard" type="boolean">
+            <column name="isHard"  />
+        </property>
+        <property name="isScoba" type="boolean">
+            <column name="isScoba"  />
+        </property>
+        <property name="fixedType" type="java.lang.Integer">
+            <column name="fixed_type" />
+        </property>
+        <property name="metisId" type="java.lang.Integer">
+            <column name="metis_id" />
+        </property>
+        <property name="constructionId" type="java.lang.Integer">
+            <column name="construction_id" />
+        </property>
+        <property name="profilId" type="java.lang.Integer">
+            <column name="profil_id" />
+        </property>
+    </class>
+</hibernate-mapping>

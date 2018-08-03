@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 13.05.2018 18:04:56 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="emidetail.database.beans.MetisTrayLink" table="Metis_tray_link" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <property name="trayTypeId" type="java.lang.Integer">
+            <column name="tray_type_id" />
+        </property>
+        <property name="trayConstructionId" type="java.lang.Integer">
+            <column name="tray_construction_id" />
+        </property>
+        <property name="coverConstructionId" type="java.lang.Integer">
+            <column name="cover_construction_id" />
+        </property>
+        <property name="metisConstructionId" type="java.lang.Integer">
+            <column name="metis_construction_id" />
+        </property>
+        <property name="metisId" type="java.lang.Integer">
+            <column name="metis_id" />
+        </property>
+        <property name="metisCount" type="java.lang.Integer">
+            <column name="metis_count" />
+        </property>
+        <property name="metisLength" type="java.lang.Integer">
+            <column name="metis_length" />
+        </property>
+        <property name="standConstructionId" type="java.lang.Integer">
+            <column name="stand_construction_id" />
+        </property>
+        <property name="standTypeId" type="java.lang.Integer">
+            <column name="stand_type_id" />
+        </property>
+        <property name="connectorTypeId" type="java.lang.Integer">
+            <column name="connector_type_id" />
+        </property>
+    </class>
+</hibernate-mapping>

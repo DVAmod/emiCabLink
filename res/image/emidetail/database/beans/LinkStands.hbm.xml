@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 4, 2018 11:41:26 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="emidetail.database.beans.LinkStands" table="LinkStands" optimistic-lock="version">
+        <composite-id name="id" class="emidetail.database.beans.LinkStands">
+            <key-property name="id" type="java.lang.Integer">
+                <column name="id" />
+            </key-property>
+            <key-property name="profilIds" type="string">
+                <column name="profil_ids" length="2000000000" />
+            </key-property>
+            <key-property name="standIds" type="string">
+                <column name="stand_ids" length="2000000000" />
+            </key-property>
+            <key-property name="classStr" type="string">
+                <column name="class_str" length="2000000000" />
+            </key-property>
+            <key-property name="classId" type="java.lang.Integer">
+                <column name="class_id" />
+            </key-property>
+            <key-property name="addDiametr" type="java.lang.Integer">
+                <column name="add_diametr" />
+            </key-property>
+            <key-property name="description" type="string">
+                <column name="description" length="2000000000" />
+            </key-property>
+            <key-property name="articul" type="string">
+                <column name="articul" length="2000000000" />
+            </key-property>
+            <key-property name="mass" type="string">
+                <column name="mass" length="2000000000" />
+            </key-property>
+            <key-property name="count" type="java.lang.Integer">
+                <column name="count" />
+            </key-property>
+        </composite-id>
+    </class>
+</hibernate-mapping>
