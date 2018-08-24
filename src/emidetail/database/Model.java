@@ -56,6 +56,23 @@ public class Model extends Observable{
     
     public int UID = 1;
     
+    public List<String> addtraylist;
+          
+    public ObservableList<AdditionTrays> addtrays_list;
+    
+    public ObservableList<AdditionTrays> addTlist;
+    
+    public ObservableList<AdditionTrays> addFlist;
+    
+    
+    public ObservableList<String> addsource_list;
+    
+    public ObservableList<String> addwidth_list;
+    
+    public ObservableList<String> addheight_list;
+    
+    public ObservableList<String> addthickness_list;
+    
     public int TRAY_INDEX = 0;
     
     public int CON_INDEX = 1;
@@ -136,8 +153,6 @@ public class Model extends Observable{
     
     public ObservableList<Cover> cov_list;
     
-    public ObservableList<AdditionTrays> addtrays_list;
-    
     public ObservableList<Connector> con_list;
     
     public ObservableList<String> type_list;
@@ -212,6 +227,9 @@ public class Model extends Observable{
 
     
     public Model(){
+        
+        initAddTrays();
+        
         trayses = TraysFunctions.selectTrays();
         connects = ConnectorFunctions.selectConnector();
         reports.add(new Report());
@@ -352,24 +370,97 @@ public class Model extends Observable{
 
         length_list = FXCollections.observableArrayList(lengthlist);
         
+       
         
+    }
+    
+    
+    private void initAddTrays(){
+        List<AdditionTrays> additions = AdditionTraysFunctions.selectAddTrays();
+        //addtrays_list = FXCollections.observableArrayList(additions);
+        addTlist = FXCollections.observableArrayList(additions);
+        addFlist = FXCollections.observableArrayList(additions);
+
+        /*
         List<String> addtraylist = new ArrayList<String>();
         addtraylist.add("");
-        addtraylist.add("горизонтальный поворот трассы 45");
-        addtraylist.add("горизонтальный поворот трассы 90");
-        addtraylist.add("вертикальный внутренний на 45º");
-        addtraylist.add("вертикальный внутренний на 90º");
-        addtraylist.add("вертикальный внешний на 45º");
-        addtraylist.add("вертикальный внешний на 90º");
-        addtraylist.add("вертикальный шарнирный");
-        addtraylist.add("тройниковый");
-        addtraylist.add("крестообразный");
-        addtraylist.add("ответвительный");
-        addtraylist.add("правая редукция");
-        addtraylist.add("левая редукция"); 
-        addtraylist.add("горизонтальный изменяемый поворота трассы на 0º-90º");
+        addtraylist.add("горизонтальный поворот трассы 45"); //101
+        addtraylist.add("горизонтальный поворот трассы 90"); //102
+        addtraylist.add("вертикальный внутренний на 45º"); //103
+        addtraylist.add("вертикальный внутренний на 90º"); //104
+        addtraylist.add("вертикальный внешний на 45º"); //105
+        addtraylist.add("вертикальный внешний на 90º"); //106
+        addtraylist.add("вертикальный шарнирный"); //107
+        addtraylist.add("тройниковый"); //108
+        addtraylist.add("крестообразный"); //109
+        addtraylist.add("ответвительный"); //110
+        addtraylist.add("правая редукция");//141, 159
+        addtraylist.add("левая редукция"); //140, 158?
+        addtraylist.add("горизонтальный изменяемый поворота трассы на 0º-90º"); //115
         addtray_types = FXCollections.observableArrayList(addtraylist);
+        */
+        addtraylist = new ArrayList<String>();
+        addtraylist.add(" ");
+        addtray_types = FXCollections.observableArrayList(addtraylist);
+
+                
+        List<String> addsourcelist = new ArrayList<String>();
+        addsourcelist.add("");
+        addsourcelist.add("Исполнение 1");
+        addsourcelist.add("Исполнение 2");
+        addsourcelist.add("Исполнение 3");
+        addsourcelist.add("Исполнение 4");
+        addsourcelist.add("Исполнение 5");
+        addsourcelist.add("Исполнение 6");
+        addsource_list = FXCollections.observableArrayList(addsourcelist);
         
+        List<String> addwidthlist = new ArrayList<String>();
+        addwidthlist.add("");
+        addwidthlist.add("50");
+        addwidthlist.add("100");
+        addwidthlist.add("150");
+        addwidthlist.add("200");
+        addwidthlist.add("250");
+        addwidthlist.add("300");
+        addwidthlist.add("400");
+        addwidthlist.add("500");
+        addwidthlist.add("600");
+        addwidthlist.add("700");
+        addwidthlist.add("800");
+        addwidthlist.add("900");
+        addwidthlist.add("1000");
+        addwidth_list = FXCollections.observableArrayList(addwidthlist);
+        
+        List<String> addheightlist = new ArrayList<String>();
+        addheightlist.add("");
+        addheightlist.add("25");
+        addheightlist.add("40");
+        addheightlist.add("50");
+        addheightlist.add("60");
+        addheightlist.add("70");
+        addheightlist.add("75");
+        addheightlist.add("80");
+        addheightlist.add("85");
+        addheightlist.add("100");
+        addheightlist.add("110");
+        addheightlist.add("120");
+        addheightlist.add("150");
+        addheightlist.add("160");
+        addheightlist.add("200");
+        addheight_list = FXCollections.observableArrayList(addheightlist);
+        
+        List<String> addthicknesslist = new ArrayList<String>();
+        addthicknesslist.add("");
+        addthicknesslist.add("0,8");
+        addthicknesslist.add("1,0");
+        addthicknesslist.add("1,2");
+        addthicknesslist.add("1,5");
+        addthicknesslist.add("2,0");
+        addthicknesslist.add("2,5");
+        addthicknesslist.add("3,5");
+        addthicknesslist.add("4,5");
+        addthicknesslist.add("5,5");
+        addthickness_list = FXCollections.observableArrayList(addthicknesslist);
     }
     
     
@@ -921,5 +1012,65 @@ public class Model extends Observable{
             claimStr = "";
         }
     }
+    
+    public ObservableList<AdditionTrays> filteredAcs(SearchData data) {
+        System.out.println("Вошел в filteredAcs без треев");
+
+        List<AdditionTrays> list = null;
+        list = AdditionTraysFunctions.selectAddTraysByFilter(data);
+        if (list!=null){
+            if (list.size()>0) {
+                System.out.println("Модель получила список добавочных треев " + list.size());
+                addFlist.addAll(list);
+            }else {
+                System.out.println("Модель получила пустой список добавочных треев");
+            }                
+        } else {
+            System.out.println("Модель получила неинициализированный список добавочных треев");
+        }
+
+        System.out.println("Итоговый размер списка в модели (треи + добавочные треи) = " + addFlist.size());
+        
+        return null;
+    }    
+  
+    public ObservableList<AdditionTrays> filteredAcs(SearchData data, boolean isSpec, List traysList) {
+        System.out.println("Вошел в filteredAcs");
+
+        if (data == null){
+            System.out.println("Фильтр аксессуаров null");
+            return null;
+        }
+
+        addFlist.clear();
+
+        if (isSpec && data.getArticul() != null && !data.getArticul().equalsIgnoreCase("")) {
+            System.out.println("Пытаюсь отфильтровать filteredAcs по артикулу");
+            for (AdditionTrays tray: addTlist) {
+                    String articul = tray.getArticul();
+                    if (articul.contains(data.getArticul())) {
+                        addFlist.add(tray);
+                    }
+                }
+            if (addFlist.size() > 0) {
+                notifyObservers();
+            }
+        } else {
+            System.out.println("начинаю формировать filteredAcs");
+
+            if ((traysList != null) && (!traysList.isEmpty())){
+                addFlist.addAll(traysList);
+            } else {
+                System.out.println("список аксессуарных треев null или пустой");                        
+            }
+                    
+            filteredAcs(data);
+        }
+        /*
+        if (selectTray == null) {
+            return null;
+        }*/
+        return null;
+    }    
     
 }

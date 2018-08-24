@@ -68,9 +68,19 @@ public class SearchData {
         types.add(t);
     }
     
+    public void addToTypes(int t) {
+        types.add(t);
+        //System.out.println("SearchData addToTypes = " + types.toString());
+    }   
+    
     public void addSource(int s) {
         sources.clear();
         sources.add(s);
+    }
+    
+    public void clearTypes(){
+        types.clear();
+        //System.out.println("SearchData clearTypes = " + types.toString());
     }
 
     public String getArticul() {
@@ -129,7 +139,19 @@ public class SearchData {
     }
 
     public String getType() {
-        return String.valueOf(types.get(0)); //To change body of generated methods, choose Tools | Templates.
+        if ((types == null) || (types.isEmpty())){
+            return null;
+        }
+        if (types.size() == 1){
+            return String.valueOf(types.get(0));           
+        }
+        
+        String result = String.valueOf(types.get(0));
+        for (int i = 1; i < types.size(); i++){
+            result = result + (" or t.type=" + types.get(i));
+            //System.out.println(result);
+        }
+        return result;
     }
 
     public boolean isSource() {
@@ -162,6 +184,10 @@ public class SearchData {
         this.length = 0;
         this.ths = "";
         this.articul = "";
+    }
+
+    public void clearSource() {
+        sources.clear(); //To change body of generated methods, choose Tools | Templates.
     }
     
     

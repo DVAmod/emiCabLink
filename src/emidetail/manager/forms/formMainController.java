@@ -28,6 +28,7 @@ import emidetail.database.utils.ConstructionFunctions;
 import emidetail.database.utils.CoverFunctions;
 import emidetail.database.utils.DivisionFunctions;
 import emidetail.database.utils.MetisFunctions;
+import emidetail.database.utils.TraysFunctions;
 import emidetail.database.utils.TypesFunctions;
 import emidetail.filter.SearchData;
 import emidetail.manager.ActionController;
@@ -42,6 +43,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -223,6 +225,8 @@ public class formMainController implements Initializable, Observer {
     private SearchData profilFilter;
     
     private SearchData bracketFilter;
+    
+    private SearchData acsDataFilter;
     
     private EditorEx editor;
     
@@ -424,22 +428,28 @@ public class formMainController implements Initializable, Observer {
     private CheckBox locClaimCheck;
     @FXML
     private Pane filtredAcsPane;
+    
+    /* 
+    ACS
+    */
+    @FXML
+    private ComboBox<String> locAcsTrayTyper;
     @FXML
     private ComboBox<String> locAcsType;
     @FXML
-    private ComboBox<?> locAcsSource;
+    private ComboBox<String> locAcsSource;
     @FXML
-    private ComboBox<?> locAcsHeight;
+    private ComboBox<String> locAcsHeight;
     @FXML
-    private ComboBox<?> locAcsWidth;
+    private ComboBox<String> locAcsWidth;
+    @FXML
+    private ComboBox<String> locThsAcs;
     @FXML
     private TextField locArtAcs;
     @FXML
     private Label locArtLabel1;
     @FXML
     private Label locLengthLabel1;
-    @FXML
-    private ComboBox<?> locThsAcs;
     @FXML
     private TableView<AdditionTrays> locAcsTable;
     @FXML
@@ -512,9 +522,20 @@ public class formMainController implements Initializable, Observer {
         colAcsDesc.setCellValueFactory(new PropertyValueFactory<>("definition"));
         colAcsArticul.setCellValueFactory(new PropertyValueFactory<>("articul"));
 
-        locAcsTable.setItems(Model.getInstance().addtrays_list);
+        locAcsTable.setItems(Model.getInstance().addFlist);
         
-        locAcsType.setItems(Model.getInstance().addtray_types);
+        if (Model.getInstance().type_list != null){
+            if (locAcsTrayTyper == null){
+                System.out.println("null locAcsTrayTyper");
+            }
+            locAcsTrayTyper.setItems(Model.getInstance().type_list);            
+            locAcsType.setItems(Model.getInstance().addtray_types);
+            locAcsSource.setItems(Model.getInstance().addsource_list);
+            locAcsWidth.setItems(Model.getInstance().addwidth_list);
+            locAcsHeight.setItems(Model.getInstance().addheight_list);
+            locThsAcs.setItems(Model.getInstance().addthickness_list);
+        }
+
         
         treeNameColumn.setCellValueFactory(new TreeItemPropertyValueFactory<>("title"));
         treeCountColumn.setCellValueFactory(new TreeItemPropertyValueFactory<>("count"));
@@ -541,13 +562,24 @@ public class formMainController implements Initializable, Observer {
         locListStands.setItems(Model.getInstance().stand_list);
         locListProfil.setItems(Model.getInstance().profil_list);
         locListClaims.setItems(Model.getInstance().bracket_list);//Bracket
-        
-        
     }
     
     public void initTray(){
         
-        
+        Thread runner = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while(true){
+                    try {
+                        SectionValue.setRoadLenght(locRoadEdit.getValue());
+                        SectionValue.setSectionStep(Float.valueOf(locSectionStep.getValue()));
+                        Thread.sleep(1500);
+                    } catch (Exception ex) {
+                    }
+                }
+            }
+        });
+        runner.start();
         
         
         locDividers.setItems(Model.getInstance().dividers);
@@ -704,7 +736,7 @@ public class formMainController implements Initializable, Observer {
         elementTree.setRoot("New Project");
         
     }
-    
+
     
     private void standUpdate() {
         if (locListStands.getSelectionModel().getSelectedItem()==null)
@@ -731,16 +763,34 @@ public class formMainController implements Initializable, Observer {
     private void onStandClass(ActionEvent event) {
         Types prClass = locStandClass.getSelectionModel().getSelectedItem();
         if (prClass!=null) {
-            standsFilter.addType(prClass.getId());
-            Model.getInstance().updateStandFilter(standsFilter);
+        standsFilter.addType(prClass.getId());
+        Model.getInstance().updateStandFilter(standsFilter);
             this.standUpdate();
-        }
+    }
     }
 
     @FXML
     private void onStandLength(ActionEvent event) {
         String strL = locStandLength.getSelectionModel().getSelectedItem();
         int length = 1;
+        /*
+        stands_length.add("100-115-130");
+            stands_length.add("135-150-175");
+            stands_length.add("180-200-215");
+            stands_length.add("220-230-250");
+            stands_length.add("270-280-300");
+            stands_length.add("315-320-330");
+            stands_length.add("350-400-415");
+            stands_length.add("420-430-450");
+            stands_length.add("480-500-515");
+            stands_length.add("520-550-565");
+            stands_length.add("600-615-620");
+            stands_length.add("650-700-715");
+            stands_length.add("750-800-810-815");
+            stands_length.add("900-910-915-950");
+            stands_length.add("1000-1010-1015-1020");
+            stands_length.add("1100-1110-1300");
+        */
         if (strL.startsWith("100-")) {
             standsFilter.clearLength();
             standsFilter.addLength(100);
@@ -906,10 +956,10 @@ public class formMainController implements Initializable, Observer {
     private void onProfilClass(ActionEvent event) {
         Types prClass = locProfilClass.getSelectionModel().getSelectedItem();
         if (prClass!=null) {
-            profilFilter.addType(prClass.getId());
-            Model.getInstance().updateProfilFilter(profilFilter);
+        profilFilter.addType(prClass.getId());
+        Model.getInstance().updateProfilFilter(profilFilter);
             this.profilUpdate();
-        }
+    }
     }
 
     @FXML
@@ -1035,10 +1085,10 @@ public class formMainController implements Initializable, Observer {
     private void onBracketClass(ActionEvent event) {
         String brClass = locClaimsClass.getSelectionModel().getSelectedItem();
         if (brClass!=null) {
-            bracketFilter.setArticul(brClass);
-            Model.getInstance().updateBracketFilter(bracketFilter);
+        bracketFilter.setArticul(brClass);
+        Model.getInstance().updateBracketFilter(bracketFilter);
             this.bracketUpdate();
-        }
+    }
     }
 
     @FXML
@@ -1285,8 +1335,8 @@ public class formMainController implements Initializable, Observer {
                 //Stand stand = locListStands.getSelectionModel().getSelectedItem();
                 //elementTree.addTreeItems(stand.getTitle()+"       "+locStandCounts.getText());
                 if (!isInitReport) {
-                    AddReportValues(6, null, "1");
-                    elementTree.addTreeItems(Model.getInstance().getLastReport());
+                AddReportValues(6, null, "1");
+                elementTree.addTreeItems(Model.getInstance().getLastReport());
                     isInitReport = true;
                     this.clearProjectTree(true);
                 }
@@ -1309,12 +1359,12 @@ public class formMainController implements Initializable, Observer {
                 //elementTree.addTreeItems(locListProfil.getSelectionModel().getSelectedItem().getTitle()+"       "+locClaimsCounts.getText());
                 
                 if (!isInitReport) {
-                    AddReportValues(6, null, "2");
-                    elementTree.addTreeItems(Model.getInstance().getLastReport());
+                AddReportValues(6, null, "2");
+                elementTree.addTreeItems(Model.getInstance().getLastReport());
                     isInitReport = true;
                     this.clearProjectTree(true);
                 }
-                
+
                 AddReportValues(6, null, "2");
                 elementTree.addTreeItems(Model.getInstance().getLastReport());
 
@@ -1328,12 +1378,12 @@ public class formMainController implements Initializable, Observer {
         if (locListClaims.getSelectionModel().getSelectedItem()!=null){
             //elementTree.addTreeItems(locListClaims.getSelectionModel().getSelectedItem().getTitleDisplay()+"       "+locClaimsCounts.getText());
             if (!isInitReport) {
-                AddReportValues(6, null, "3");
-                elementTree.addTreeItems(Model.getInstance().getLastReport());
+            AddReportValues(6, null, "3");
+            elementTree.addTreeItems(Model.getInstance().getLastReport());
                 isInitReport = true;
                 this.clearProjectTree(true);
             }
-             
+                    
             AddReportValues(6, null, "3");
             elementTree.addTreeItems(Model.getInstance().getLastReport());
                     
@@ -1435,14 +1485,6 @@ public class formMainController implements Initializable, Observer {
 
     @FXML
     private void handleArtAcsReleased(KeyEvent event) {
-    }
-
-    @FXML
-    private void handleThsAcsAction(ActionEvent event) {
-    }
-
-    @FXML
-    private void handleAcsFilterClear(ActionEvent event) {
     }
 
     @FXML
@@ -1563,6 +1605,9 @@ public class formMainController implements Initializable, Observer {
         
         bracketFilter = new SearchData();
         
+        acsDataFilter = new SearchData();
+        trayFilterForAcs = new SearchData();
+        
         dataFilter.setThs("0");
         
         controller = new ActionController();
@@ -1589,7 +1634,7 @@ public class formMainController implements Initializable, Observer {
                         if (locRoadEdit!=null && locSectionStep!=null && locRoadEdit.getValue()!=null && locSectionStep.getValue()!=null) {
                             SectionValue.setRoadLenght(locRoadEdit.getValue());
                             SectionValue.setSectionStep(Float.valueOf(locSectionStep.getValue()));
-                        }
+    }
                         Thread.sleep(1000);
                     } catch (InterruptedException ex) {
                     }
@@ -1597,7 +1642,7 @@ public class formMainController implements Initializable, Observer {
             }
         });
         runner.start();
-        
+    
         //
         locClaimView.getSelectionModel().select(0);
     }
@@ -1642,7 +1687,7 @@ public class formMainController implements Initializable, Observer {
         controller.process(Command.LOAD_PR, Command.LOAD_PR);
         try {
             Thread.yield();
-            Thread.sleep(500);
+            Thread.sleep(1000);
         } catch (InterruptedException ex) {
             Logger.getLogger(formMainController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1692,9 +1737,17 @@ public class formMainController implements Initializable, Observer {
     
     @ActionProxy(text="Сформировать отчет", graphic=imagePath2)
     private void action21() {
+        /*
+    	   Command task = new ReportCommand();
+        try {
+            task.execute("");
+        } catch (IOException ex) {
+            Logger.getLogger(formMainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        */
         
         controller.addData(Model.getInstance().reports);
-        controller.process(Command.REPORT_S, "2");
+        controller.process(Command.REPORT_S, "");
         if (controller.getOutput()!=null)
             this.AlertDialogShow("Успешно", 1);
         
@@ -1779,6 +1832,8 @@ public class formMainController implements Initializable, Observer {
         System.out.println("Conlist "+Model.getInstance().con_list.size());
         locTrayView.setItems(Model.getInstance().flist);
         locClampingView.setItems(Model.getInstance().con_list);
+        
+        locAcsTable.setItems(Model.getInstance().addFlist);
     }
 
     @FXML
@@ -2003,10 +2058,10 @@ public class formMainController implements Initializable, Observer {
                         }
                     Model.getInstance().claimses.clear();
                     Model.getInstance().updateClaimsByTrays(standType,Model.getInstance().selectTray, ishard, 1); // ???  
-                   
+                    
                     vals.hard = ishard;
                     vals = calcSectionValues();
-                  
+                   
                     List<Claims> claims = Model.getInstance().claimses;
                     if (claims!=null)
                         if (claims.size()>0) {
@@ -2082,14 +2137,14 @@ public class formMainController implements Initializable, Observer {
                 } else {
                     covis = 0;
                     Model.getInstance().updateClaimsByTrays(standType,Model.getInstance().selectTray, ishard, covis); // ???  
-                }
-                
+                }    
+                  
                 //Model.getInstance().claimses
                 
                  
                 boolean isfixedstand = false;  
                 List<Claims> claims = Model.getInstance().claimses;
-                 if (claims!=null)
+                if (claims!=null)
                  if (claims.size()> 0)    
                 if (claims.get(0).getType()==51 || claims.get(0).getType()==61 || claims.get(0).getType()==65 || claims.get(0).getType()==54) {
                     isfixedstand = true;
@@ -2245,10 +2300,10 @@ public class formMainController implements Initializable, Observer {
                         if (Model.getInstance().selectTray!=null) {
                             if (Model.getInstance().selectTray.getLength()> 3000) {
                                 rep.setCount(vals.countSection*3);
-                            }
+            }
                             if (Model.getInstance().selectTray.getLength() >5000) {
                                 rep.setCount(vals.countSection*4);
-                            }
+        }
                         }
                         rep.setCount_type("шт.");
                         rep.setDescription("АО «СЗ ЭМИ»");
@@ -2518,8 +2573,8 @@ public class formMainController implements Initializable, Observer {
                 if (element[i] != null)
                     code = code.concat(". "+element[i]);
             }
-
             
+                    
             AddReportValues(4, calcSectionValues(),code);
             
             elementTree.addTreeItems(Model.getInstance().getLastReport());
@@ -2597,7 +2652,7 @@ public class formMainController implements Initializable, Observer {
                 }
             }
             
-            if (locClaimCheck.isSelected() && locClaimView.getSelectionModel().getSelectedItem()!=null) {
+            if (locClaimCheck.isSelected() && locDividers.getSelectionModel().getSelectedItem()!=null) {
                 AddReportValues(7, val, "");
                 if (isTrayClaims) {
                     Report claimsRep = Model.getInstance().getLastPrevReport();
@@ -2636,7 +2691,7 @@ public class formMainController implements Initializable, Observer {
                             
                             isInnerClaims = false;
                         } else {
-                            divisionRep = Model.getInstance().getLastPrevReport();
+                        divisionRep = Model.getInstance().getLastPrevReport();
                             divMetisRep = Model.getInstance().getLastReport();
                         }
                         dividerIndex = elementTree.addTreeDoubleLeaf(indTray, divisionRep,divMetisRep);
@@ -2649,7 +2704,7 @@ public class formMainController implements Initializable, Observer {
                             divInner = Model.getInstance().getLastReport();
                             elementTree.addTreeLeaf(indTray, divInner);
                         } else {
-                            divisionRep = Model.getInstance().getLastReport();
+                        divisionRep = Model.getInstance().getLastReport();
                         }
                         System.out.println("5 Divider add to tray - "+divisionRep.getTitle());
                         dividerIndex = elementTree.addTreeLeaf(indTray, divisionRep);
@@ -2836,13 +2891,13 @@ public class formMainController implements Initializable, Observer {
     @FXML
     private void handleReport(ActionEvent event) {
         try{
-            controller.addData(Model.getInstance().reports);
+        controller.addData(Model.getInstance().reports);
             controller.process(Command.REPORT_S, "1");
-            if (controller.getOutput()!=null)
+        if (controller.getOutput()!=null)
                 Desktop.getDesktop().open(new File("object_collection_output.xls")); // /tmp/MyFirstExcel.xlsx
         } catch (IOException ex) {
             Logger.getLogger(formMainController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    }
     }
 
     @FXML
@@ -2902,4 +2957,560 @@ public class formMainController implements Initializable, Observer {
         return val;
     }
 
+    
+    /*
+    
+    acs
+    
+    */
+   
+    private SearchData trayFilterForAcs;
+    
+    @FXML
+    private void handleAcsTrayTypeAction(ActionEvent event){
+        int sel_index = locAcsTrayTyper.getSelectionModel().getSelectedIndex();
+        System.out.println("Sel "+sel_index+" - "+locAcsTrayTyper.getValue());
+
+        //trayFilterForAcs = null;
+        //trayFilterForAcs = new SearchData();
+        //acsDataFilter = null;
+        //acsDataFilter = new SearchData();
+        /*
+        typelist.add("");
+        1   typelist.add("Листовой перфорированный");
+        2   typelist.add("Листовой неперфорированный");
+        3   typelist.add("Листовой перфорированный тяжелой серии");
+        4   typelist.add("Листовой неперфорированный тяжелой серии");
+        5   typelist.add("Лоток перфорированный для больших расстояний");
+        6   typelist.add("Лоток лестничный усиленный");
+        7   typelist.add("Кабельрост лестничный усиленный");
+        8   typelist.add("Лоток сетчатый");
+        9   typelist.add("Канал усиленный световой");
+        */
+
+        //List<String> addtraylist = Model.getInstance().addtraylist;
+        Model.getInstance().addtraylist.clear();
+        Model.getInstance().addtraylist.add("");
+        if (sel_index <= 0){
+            trayFilterForAcs.addType(0);
+            acsDataFilter.addType(0);
+            locAcsTrayTyper.getSelectionModel().selectFirst();
+        }
+        if ((sel_index == 1) 
+                || (sel_index == 2) 
+                || (sel_index == 3)
+                || (sel_index == 4)
+                || (sel_index == 5)){
+            int tray_index = 0;
+            if (sel_index == 1){
+                tray_index = 1;
+            }            
+            if (sel_index == 2){
+                tray_index = 2;
+            }
+            if (sel_index == 3){
+                tray_index = 3;
+            }
+            if (sel_index == 4){
+                tray_index = 4;
+            }
+            if (sel_index == 5){
+                tray_index = 5;
+            }
+            trayFilterForAcs.addType(tray_index);
+            acsDataFilter.addType(tray_index);
+            acsDataFilter.addToTypes(101);
+            acsDataFilter.addToTypes(102);
+            acsDataFilter.addToTypes(103);
+            acsDataFilter.addToTypes(104);
+            acsDataFilter.addToTypes(105);
+            acsDataFilter.addToTypes(106);
+            acsDataFilter.addToTypes(107);
+            acsDataFilter.addToTypes(108);
+            acsDataFilter.addToTypes(109);
+            acsDataFilter.addToTypes(110);
+            acsDataFilter.addToTypes(111);
+            acsDataFilter.addToTypes(112);
+            acsDataFilter.addToTypes(113);
+            acsDataFilter.addToTypes(114);
+            acsDataFilter.addToTypes(115);
+
+            /*addtraylist.add("");
+            addtraylist.add("горизонтальный поворот трассы 45"); //101
+            addtraylist.add("горизонтальный поворот трассы 90"); //102
+            addtraylist.add("вертикальный внутренний на 45º"); //103
+            addtraylist.add("вертикальный внутренний на 90º"); //104
+            addtraylist.add("вертикальный внешний на 45º"); //105
+            addtraylist.add("вертикальный внешний на 90º"); //106
+            addtraylist.add("вертикальный шарнирный"); //107
+            addtraylist.add("тройниковый"); //108, 111, 112, 113, 114
+            addtraylist.add("крестообразный"); //109
+            addtraylist.add("ответвительный"); //110
+            addtraylist.add("горизонтальный изменяемый поворота трассы на 0º-90º"); //115*/
+            
+            Model.getInstance().addtraylist.add("горизонтальный поворот трассы 45"); //101
+            Model.getInstance().addtraylist.add("горизонтальный поворот трассы 90"); //102
+            Model.getInstance().addtraylist.add("вертикальный внутренний на 45º"); //103
+            Model.getInstance().addtraylist.add("вертикальный внутренний на 90º"); //104
+            Model.getInstance().addtraylist.add("вертикальный внешний на 45º"); //105
+            Model.getInstance().addtraylist.add("вертикальный внешний на 90º"); //106
+            Model.getInstance().addtraylist.add("вертикальный шарнирный"); //107
+            Model.getInstance().addtraylist.add("тройниковый"); //108, 111, 112, 113, 114
+            Model.getInstance().addtraylist.add("крестообразный"); //109
+            Model.getInstance().addtraylist.add("ответвительный"); //110
+            Model.getInstance().addtraylist.add("горизонтальный изменяемый поворота трассы на 0º-90º"); //115
+        }
+        if (sel_index == 6){
+            // Лоток лестничный усиленный
+            trayFilterForAcs.addType(6);
+
+            acsDataFilter.addType(6);
+            acsDataFilter.addToTypes(120);
+            acsDataFilter.addToTypes(122);
+            acsDataFilter.addToTypes(124);
+            acsDataFilter.addToTypes(126);
+            acsDataFilter.addToTypes(133);
+            acsDataFilter.addToTypes(135);
+            acsDataFilter.addToTypes(137);
+            acsDataFilter.addToTypes(140);
+            acsDataFilter.addToTypes(141);
+            acsDataFilter.addToTypes(142);
+            acsDataFilter.addToTypes(144);
+            acsDataFilter.addToTypes(148);
+            acsDataFilter.addToTypes(152);
+            acsDataFilter.addToTypes(156);
+            acsDataFilter.addToTypes(157);
+            acsDataFilter.addToTypes(158);
+            acsDataFilter.addToTypes(159);
+            acsDataFilter.addToTypes(160);
+            
+            Model.getInstance().addtraylist.add("горизонтальный поворот трассы 30º"); // 120
+            Model.getInstance().addtraylist.add("горизонтальный поворот трассы 45º"); // 122
+            Model.getInstance().addtraylist.add("горизонтальный поворот трассы 60º"); // 124
+            Model.getInstance().addtraylist.add("горизонтальный поворот трассы 90º"); // 126
+            Model.getInstance().addtraylist.add("вертикальный внешний поворот трассы 90º"); // 128, 148
+            Model.getInstance().addtraylist.add("вертикальный внутренний поворот трассы 90º"); // 130, 152
+            Model.getInstance().addtraylist.add("тройниковый"); // 133
+            Model.getInstance().addtraylist.add("крестообразный"); //135
+            Model.getInstance().addtraylist.add("вертикальный шарнирный"); //156, 157
+            Model.getInstance().addtraylist.add("редукция левая"); //140
+            Model.getInstance().addtraylist.add("редукция правая"); //141, 159
+            Model.getInstance().addtraylist.add("редукция центральная"); //142, 158, 160
+            /*
+            addtraylist.add("");
+            addtraylist.add("горизонтальный поворот трассы 30º"); // 120
+            addtraylist.add("горизонтальный поворот трассы 45º"); // 122
+            addtraylist.add("горизонтальный поворот трассы 60º"); // 124
+            addtraylist.add("горизонтальный поворот трассы 90º"); // 126
+            addtraylist.add("вертикальный внешний поворот трассы 90º"); // 128, 148
+            addtraylist.add("вертикальный внутренний поворот трассы 90º"); // 130, 152
+            addtraylist.add("тройниковый"); // 133
+            addtraylist.add("крестообразный"); //135
+            addtraylist.add("вертикальный шарнирный"); //156, 157
+            addtraylist.add("редукция левая"); //140
+            addtraylist.add("редукция правая"); //141, 159
+            addtraylist.add("редукция центральная"); //142, 158, 160*/
+        }
+        if (sel_index == 7){
+            // Кабельрост лестничный усиленный
+            trayFilterForAcs.addType(7);
+            acsDataFilter.addType(7);
+            Model.getInstance().addtraylist.add("горизонтальный поворот трассы 30º"); // 121 
+            Model.getInstance().addtraylist.add("горизонтальный поворот трассы 45º"); // 123
+            Model.getInstance().addtraylist.add("горизонтальный поворот трассы 60º"); // 125, 138
+            Model.getInstance().addtraylist.add("горизонтальный поворот трассы 90º"); // 127, 145
+            Model.getInstance().addtraylist.add("вертикальный внешний поворот трассы 90º"); // 129, 149
+            Model.getInstance().addtraylist.add("вертикальный внутренний поворот трассы 90º"); // 131, 153
+            Model.getInstance().addtraylist.add("тройниковый"); // 134
+            Model.getInstance().addtraylist.add("крестообразный"); // 136 
+            
+            /*
+            addtraylist.add("");
+            addtraylist.add("горизонтальный поворот трассы 30º"); // 121 
+            addtraylist.add("горизонтальный поворот трассы 45º"); // 123
+            addtraylist.add("горизонтальный поворот трассы 60º"); // 125, 138
+            addtraylist.add("горизонтальный поворот трассы 90º"); // 127, 145
+            addtraylist.add("вертикальный внешний поворот трассы 90º"); // 129, 149
+            addtraylist.add("вертикальный внутренний поворот трассы 90º"); // 131, 153
+            addtraylist.add("тройниковый"); // 134
+            addtraylist.add("крестообразный"); // 136 */
+        }
+        if (sel_index == 8){
+            //Лоток сетчатый
+            acsDataFilter.addType(8);
+            trayFilterForAcs.addType(8);
+        }
+        if (sel_index == 9){
+            //Канал усиленный световой
+            acsDataFilter.addType(9);
+            trayFilterForAcs.addType(9);
+        }
+        Model.getInstance().addtray_types = FXCollections.observableArrayList(Model.getInstance().addtraylist);
+        locAcsType.getSelectionModel().clearSelection();
+        locAcsType.setItems(Model.getInstance().addtray_types);
+        
+        applyAcsFilters();
+    }
+    
+    private List<AdditionTrays> createTrayListForAcs(){
+        List<Trays> trayListForAcs = filtered(trayFilterForAcs);
+        if ((trayListForAcs == null)){
+            System.out.println("Отфильтрованный список треев == null");
+            return null;
+        }
+        if (trayListForAcs.isEmpty()){
+            System.out.println("Отфильтрованный список треев пустой");
+            return null;            
+        }
+        System.out.println("размер отфильтрованного списка треев = " + trayListForAcs.size());
+        return convertTraysListToAddTraysList(trayListForAcs);
+    }
+    
+    private List<Trays> filtered(SearchData data) {
+        return TraysFunctions.selectTraysByFilter(data);
+    }
+    
+    private List<String> convertTraysListToStringList(ObservableList<Trays> listIn){
+        List<String> result = new ArrayList<String>();
+        if ((listIn != null) && (!listIn.isEmpty())){
+            for(Trays t : listIn){
+                result.add(t.getDescription());
+            }
+        }
+        return result;
+    }
+        
+    private List<AdditionTrays> convertTraysListToAddTraysList(List<Trays> listIn){
+        if (listIn != null){
+            System.out.println("вызываю конвертер лотков в аксессуары " + listIn.size());            
+        } else {
+            System.out.println("в конвертер попал неинециализированный список треев");
+        }
+        List<AdditionTrays> result = new ArrayList<AdditionTrays>();
+        if ((listIn != null) && (!listIn.isEmpty())){
+            for(Trays t : listIn){
+    /*          public AdditionTrays(
+                int id, 
+                String articul, 
+                String definition, 
+                String inner, 
+                String thickness, 
+                Integer lenth, 
+                Integer width1, 
+                Integer width2, 
+                Integer height, 
+                String mass, 
+                String radius, 
+                Integer constructionId, 
+                String mark, 
+                Integer type, 
+                Integer coverTypeId, 
+                Integer countConnection) {
+    */
+                result.add(new AdditionTrays(
+                        t.getId(), 
+                        t.getArt(),
+                        t.getTitleDisplay(),
+                        "!!" + t.getDescription(),
+                        t.getThickness(),
+                        t.getLength(),
+                        t.getWidth(),
+                        t.getWidth(),
+                        t.getHeight(),
+                        t.getMass(),
+                        null,
+                        t.getConstructionId(),
+                        null,
+                        t.getType(),
+                        t.getCoverTypeId(),
+                        0));
+            }
+        }
+        System.out.println("наконвертировал " + result.size() + " лоткоАксессуаров");
+        return result;
+    }
+    
+    @FXML
+    private void handleAcsTypeAction(ActionEvent event) {
+        System.out.println("Поймал событие handleAcsTypeAction");
+        int sel_tray_index = locAcsTrayTyper.getSelectionModel().getSelectedIndex();
+        int sel_acs_index = locAcsType.getSelectionModel().getSelectedIndex();
+        System.out.println("Sel "+sel_acs_index+" - "+locAcsType.getValue());
+        
+        if (sel_acs_index <= 0){
+            acsDataFilter.addType(0);
+        }        
+        acsDataFilter.clearTypes();
+        int tray_index = 0;
+            if (sel_tray_index == 1){
+                tray_index = 1;
+            }            
+            if (sel_tray_index == 2){
+                tray_index = 2;
+            }
+            if (sel_tray_index == 3){
+                tray_index = 3;
+            }
+            if (sel_tray_index == 4){
+                tray_index = 4;
+            }
+            if (sel_tray_index == 5){
+                tray_index = 5;
+            }
+            acsDataFilter.addType(tray_index);
+        if ((sel_tray_index == 1) 
+                || (sel_tray_index == 2) 
+                || (sel_tray_index == 3)
+                || (sel_tray_index == 4)
+                || (sel_tray_index == 5)){
+            
+
+            if (sel_acs_index == 1){
+                acsDataFilter.addToTypes(101);
+            }
+            if (sel_acs_index == 2){
+                acsDataFilter.addToTypes(102);
+            }
+            if (sel_acs_index == 3){
+                acsDataFilter.addToTypes(103);
+            }
+            if (sel_acs_index == 4){
+                acsDataFilter.addToTypes(104);
+            }
+            if (sel_acs_index == 5){
+                acsDataFilter.addToTypes(105);
+            }
+            if (sel_acs_index == 6){
+                acsDataFilter.addToTypes(106);
+            }
+            if (sel_acs_index == 7){
+                acsDataFilter.addToTypes(107);
+            }
+            if (sel_acs_index == 8){
+                acsDataFilter.addToTypes(108);
+                acsDataFilter.addToTypes(111);
+                acsDataFilter.addToTypes(112);
+                acsDataFilter.addToTypes(113);
+                acsDataFilter.addToTypes(114);
+            }
+            if (sel_acs_index == 9){
+                acsDataFilter.addToTypes(109);
+            }
+            if (sel_acs_index == 10){
+                acsDataFilter.addToTypes(110);
+            }
+            if (sel_acs_index == 11){
+                acsDataFilter.addToTypes(115);
+            }
+        }
+        if (sel_tray_index == 6){
+            acsDataFilter.addType(6);
+            if (sel_acs_index == 1){
+                acsDataFilter.addToTypes(120);
+            }
+            if (sel_acs_index == 2){
+                acsDataFilter.addToTypes(122);
+            }
+            if (sel_acs_index == 3){
+                acsDataFilter.addToTypes(124);
+            }
+            if (sel_acs_index == 4){
+                acsDataFilter.addToTypes(126);
+            }
+            if (sel_acs_index == 5){
+                acsDataFilter.addToTypes(128);
+                acsDataFilter.addToTypes(148);
+            }
+            if (sel_acs_index == 6){
+                acsDataFilter.addToTypes(130);
+                acsDataFilter.addToTypes(152);
+            }
+            if (sel_acs_index == 7){
+                acsDataFilter.addToTypes(133);
+            }
+            if (sel_acs_index == 8){
+                acsDataFilter.addToTypes(135);
+            }
+            if (sel_acs_index == 9){
+                acsDataFilter.addToTypes(156);
+                acsDataFilter.addToTypes(157);
+            }
+            if (sel_acs_index == 10){
+                acsDataFilter.addToTypes(140);
+            }
+            if (sel_acs_index == 11){
+                acsDataFilter.addToTypes(141);
+                acsDataFilter.addToTypes(159);
+            }
+            if (sel_acs_index == 12){
+                acsDataFilter.addToTypes(142);
+                acsDataFilter.addToTypes(158);
+                acsDataFilter.addToTypes(160);
+            }
+        }
+        if (sel_tray_index == 7){
+            // Кабельрост лестничный усиленный
+            acsDataFilter.addType(7);
+            if (sel_acs_index == 1){
+                acsDataFilter.addToTypes(121);
+            }
+            if (sel_acs_index == 2){
+                acsDataFilter.addToTypes(123);
+            }
+            if (sel_acs_index == 3){
+                acsDataFilter.addToTypes(125);
+                acsDataFilter.addToTypes(138);
+            }
+            if (sel_acs_index == 4){
+                acsDataFilter.addToTypes(127);
+                acsDataFilter.addToTypes(145);
+            }
+            if (sel_acs_index == 5){
+                acsDataFilter.addToTypes(129);
+                acsDataFilter.addToTypes(149);
+            }
+            if (sel_acs_index == 6){
+                acsDataFilter.addToTypes(131);
+                acsDataFilter.addToTypes(153);
+            }
+            if (sel_acs_index == 7){
+                acsDataFilter.addToTypes(134);
+            }
+            if (sel_acs_index == 8){
+                acsDataFilter.addToTypes(136);
+            }
+        }
+        
+        
+
+        applyAcsFilters();
+    }
+
+    private boolean needTrays(){
+        //return true;
+        
+        if (locAcsType.getSelectionModel().getSelectedIndex() <= 0){
+            return true;
+        } else {
+            return false;
+        }        
+    }
+    
+    private void applyAcsFilters(){
+        if (needTrays()){
+            Model.getInstance().filteredAcs(acsDataFilter, false, createTrayListForAcs());
+        } else {
+            Model.getInstance().filteredAcs(acsDataFilter, false, null);            
+        }
+    }
+    
+    @FXML
+    private void handleAcsSourceAction(ActionEvent event) {
+        int sel_index = locAcsSource.getSelectionModel().getSelectedIndex();
+        System.out.println("Sel "+sel_index+" - "+locAcsSource.getValue());
+        int source_index = 0;
+        if (sel_index == 0){
+            acsDataFilter.clearSource();
+            trayFilterForAcs.clearSource();
+        } else if ((sel_index > 0) && (sel_index < 6)) {
+            source_index = sel_index;
+        } else {
+            source_index = 6;
+        }
+        acsDataFilter.addSource(source_index);
+        trayFilterForAcs.addSource(source_index);
+        applyAcsFilters();
+    }
+    
+    @FXML
+    private void handleAcsWidthAction(ActionEvent event) {
+        System.out.println("Get width "+locAcsWidth.getValue());
+        if (!locAcsWidth.getValue().equalsIgnoreCase("")) {
+            int takeWidth = Integer.valueOf(locAcsWidth.getValue());
+            // System.out.println("Get width "+takeWidth);
+            acsDataFilter.setWidth(takeWidth);
+            trayFilterForAcs.setWidth(takeWidth);
+        } else {
+            acsDataFilter.setWidth(0);
+            trayFilterForAcs.setWidth(0);
+        }
+        applyAcsFilters();
+    }
+    
+    @FXML
+    private void handleAcsHeightAction(ActionEvent event) {
+        System.out.println("Get height "+ locAcsHeight.getValue());
+        if (!locAcsHeight.getValue().equalsIgnoreCase("")){
+            acsDataFilter.setHeight(Integer.valueOf(locAcsHeight.getValue()));
+            trayFilterForAcs.setHeight(Integer.valueOf(locAcsHeight.getValue()));
+        } else {
+            acsDataFilter.setHeight(0);
+            trayFilterForAcs.setHeight(0);
+        }
+        applyAcsFilters();
+    }
+
+    @FXML
+    private void handleThsAcsAction(ActionEvent event) {
+        System.out.println("Get ths "+locThsAcs.getValue());
+        if (!locThsAcs.getValue().equalsIgnoreCase("")) {
+            acsDataFilter.setThs(locThsAcs.getValue());
+            trayFilterForAcs.setThs(locThsAcs.getValue());
+        } else {
+            acsDataFilter.setThs("0");
+            trayFilterForAcs.setThs("0");
+        }
+        applyAcsFilters();
+    }
+
+    @FXML
+    private void handleAcsFilterClear(ActionEvent event) {
+        acsDataFilter = null;
+        acsDataFilter = new SearchData();
+        trayFilterForAcs = null;
+        trayFilterForAcs = new SearchData();
+        
+        // trayType
+        locAcsTrayTyper.getSelectionModel().clearSelection();        
+                
+        // acsType
+        locAcsType.getSelectionModel().clearSelection();
+        
+        // source
+        locAcsSource.getSelectionModel().clearSelection();
+                
+        // width
+        locAcsWidth.getSelectionModel().clearSelection();
+                
+        // height
+        locAcsHeight.getSelectionModel().clearSelection();
+        
+        // ths
+        locThsAcs.getSelectionModel().clearSelection();
+            
+        //
+        //List<AdditionTrays> additions = AdditionTraysFunctions.selectAddTrays();
+        //Model.getInstance().addTlist = FXCollections.observableArrayList(additions);
+        //Model.getInstance().addFlist = FXCollections.observableArrayList(additions);
+        applyAcsFilters();
+    }
+
+    
+    
+    @FXML
+    private void handleAddFilterClear(ActionEvent event) {
+        /*
+        locArtEdit.clear();
+        locIP44Box.setSelected(false);
+        locHeight.setValue(null);
+        locWidth.setValue(null);
+        locTrayType.setValue(null);
+        locTrayType.getSelectionModel().clearSelection();
+        locTraySource.setValue(null);
+        locTraySource.getSelectionModel().clearSelection();
+        dataFilter = new SearchData();
+        Model.getInstance().flist.clear();
+        Model.getInstance().flist.addAll(Model.getInstance().tlist);
+        */
+    }
 }
