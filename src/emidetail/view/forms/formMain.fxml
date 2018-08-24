@@ -39,7 +39,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" fx:id="locMainAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="emidetail.manager.forms.formMainController">
+<AnchorPane id="AnchorPane" fx:id="locMainAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="emidetail.manager.forms.formMainController">
     <children>
       <VBox layoutY="69.0" prefHeight="800.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -298,9 +298,78 @@
                                                             <Font name="System Bold" size="12.0" />
                                                          </font>
                                                     </TitledPane>
-                                                    <TitledPane fx:id="locTiled3" expanded="false" onMouseClicked="#handleStateCalcSel" text="Расчет сечения лотка по кабелю">
+                                                    <TitledPane fx:id="locTiled3" expanded="false" onMouseClicked="#handleStateCalcSel" text="Выбор сечения лотка">
                                                       <content>
-                                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                               <children>
+                                                                  <BorderPane prefHeight="507.0" prefWidth="1238.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                     <top>
+                                                                        <HBox prefHeight="333.0" prefWidth="1219.0" BorderPane.alignment="CENTER">
+                                                                           <children>
+                                                                              <Pane prefHeight="334.0" prefWidth="577.0">
+                                                                                 <children>
+                                                                                    <Label layoutX="26.0" layoutY="14.0" text="Данные по кабелям (проводам)">
+                                                                                       <font>
+                                                                                          <Font name="System Bold" size="13.0" />
+                                                                                       </font>
+                                                                                    </Label>
+                                                                                    <Label layoutX="26.0" layoutY="60.0" text="Диаметр, мм" />
+                                                                                    <Label layoutX="204.0" layoutY="60.0" text="Количество, шт" />
+                                                                                    <Label layoutX="372.0" layoutY="59.0" text="Способ прокладки">
+                                                                                       <font>
+                                                                                          <Font size="13.0" />
+                                                                                       </font>
+                                                                                    </Label>
+                                                                                    <ComboBox fx:id="CablingMethod1" layoutX="372.0" layoutY="105.0" onAction="#onChangeCabling" prefHeight="25.0" prefWidth="183.0" />
+                                                                                    <TextField fx:id="locCabelCount1" layoutX="204.0" layoutY="105.0" prefHeight="25.0" prefWidth="106.0" />
+                                                                                    <TextField fx:id="locCableDiametr1" layoutX="23.0" layoutY="105.0" prefHeight="25.0" prefWidth="114.0" />
+                                                                                    <TextField fx:id="locCableDiametr2" layoutX="23.0" layoutY="154.0" prefHeight="25.0" prefWidth="115.0" />
+                                                                                    <TextField fx:id="locCabelCount2" layoutX="204.0" layoutY="154.0" prefHeight="25.0" prefWidth="109.0" />
+                                                                                    <ComboBox fx:id="CablingMethod2" layoutX="372.0" layoutY="154.0" onAction="#onChangeCabling" prefHeight="25.0" prefWidth="182.0" />
+                                                                                    <TextField fx:id="locCableDiametr3" layoutX="23.0" layoutY="204.0" prefHeight="25.0" prefWidth="115.0" />
+                                                                                    <TextField fx:id="locCabelCount3" layoutX="204.0" layoutY="204.0" prefHeight="25.0" prefWidth="109.0" />
+                                                                                    <ComboBox fx:id="CablingMethod3" layoutX="372.0" layoutY="204.0" onAction="#onChangeCabling" prefHeight="25.0" prefWidth="180.0" />
+                                                                                    <TextField fx:id="locCableDiametr4" layoutX="23.0" layoutY="252.0" prefHeight="25.0" prefWidth="115.0" />
+                                                                                    <TextField fx:id="locCabelCount4" layoutX="204.0" layoutY="252.0" prefHeight="25.0" prefWidth="109.0" />
+                                                                                    <ComboBox fx:id="CablingMethod4" layoutX="372.0" layoutY="252.0" onAction="#onChangeCabling" prefHeight="25.0" prefWidth="181.0" />
+                                                                                    <ImageView fx:id="locHintView" accessibleText="Диаметры кабелей по типам" cache="true" cacheHint="SPEED" fitHeight="30.0" fitWidth="35.0" layoutX="118.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
+                                                                                       <cursor>
+                                                                                          <Cursor fx:constant="HAND" />
+                                                                                       </cursor>
+                                                                                    </ImageView>
+                                                                                 </children>
+                                                                              </Pane>
+                                                                              <Separator orientation="VERTICAL" prefHeight="200.0" />
+                                                                              <Pane prefHeight="349.0" prefWidth="549.0">
+                                                                                 <children>
+                                                                                    <Label layoutX="14.0" layoutY="60.0" text="Результат вычисления">
+                                                                                       <font>
+                                                                                          <Font size="13.0" />
+                                                                                       </font>
+                                                                                    </Label>
+                                                                                    <ImageView fx:id="locCableView" fitHeight="194.0" fitWidth="340.0" layoutX="209.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true" style="border: 1;" />
+                                                                                    <Label layoutX="52.0" layoutY="157.0" text="Размеры лотка, мм" />
+                                                                                    <TextField fx:id="locCableRate" editable="false" layoutX="42.0" layoutY="184.0" />
+                                                                                    <Button layoutX="42.0" layoutY="260.0" mnemonicParsing="false" onAction="#onGotoTray" prefHeight="25.0" prefWidth="170.0" text="К выбранным лоткам" />
+                                                                                 </children>
+                                                                              </Pane>
+                                                                           </children>
+                                                                        </HBox>
+                                                                     </top>
+                                                                     <left>
+                                                                        <Pane prefHeight="139.0" prefWidth="241.0" BorderPane.alignment="CENTER" />
+                                                                     </left>
+                                                                     <right>
+                                                                        <Pane prefHeight="139.0" prefWidth="641.0" BorderPane.alignment="CENTER">
+                                                                           <children>
+                                                                              <Button layoutX="43.0" layoutY="32.0" mnemonicParsing="false" onAction="#onClearCables" prefHeight="25.0" prefWidth="88.0" text="Сбросить" />
+                                                                              <Button defaultButton="true" layoutX="163.0" layoutY="32.0" mnemonicParsing="false" onAction="#onCalcCables" prefHeight="25.0" prefWidth="94.0" text="Вычислить" />
+                                                                              <Button layoutX="43.0" layoutY="94.0" mnemonicParsing="false" onAction="#onCancelCables" text="Вернутся (без изменений)" />
+                                                                           </children>
+                                                                        </Pane>
+                                                                     </right>
+                                                                  </BorderPane>
+                                                               </children></AnchorPane>
                                                       </content>
                                                          <font>
                                                             <Font name="System Bold" size="12.0" />
