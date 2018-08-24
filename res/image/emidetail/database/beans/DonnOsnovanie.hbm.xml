@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 11.08.2018 20:32:04 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="emidetail.database.beans.DonnOsnovanie" table="DonnOsnovanie" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <property name="titleDisplay" type="string">
+            <column name="title_display" length="2000000000" not-null="true" />
+        </property>
+        <property name="classId" type="java.lang.Integer">
+            <column name="class_id" />
+        </property>
+        <property name="articul" type="string">
+            <column name="articul" length="2000000000" />
+        </property>
+        <property name="mass" type="string">
+            <column name="mass" length="2000000000" />
+        </property>
+        <property name="description" type="string">
+            <column name="description" length="2000000000" />
+        </property>
+        <property name="thickness" type="string">
+            <column name="thickness" length="2000000000" />
+        </property>
+        <property name="radius" type="java.lang.Integer">
+            <column name="radius" />
+        </property>
+        <property name="width" type="java.lang.Integer">
+            <column name="width" />
+        </property>
+        <property name="length" type="java.lang.Integer">
+            <column name="length" />
+        </property>
+        <property name="constructionId" type="java.lang.Integer">
+            <column name="construction_id" />
+        </property>
+        <property name="classSrc" type="string">
+            <column name="class_src" length="2000000000" />
+        </property>
+        <property name="type" type="java.lang.Integer">
+            <column name="type" />
+        </property>
+        <property name="widthDop1" type="java.lang.Integer">
+            <column name="width_dop1" />
+        </property>
+        <property name="typeSpec" type="string">
+            <column name="type_spec" length="2000000000" />
+        </property>
+        <property name="widthDop2" type="java.lang.Integer">
+            <column name="width_dop2" />
+        </property>
+    </class>
+</hibernate-mapping>

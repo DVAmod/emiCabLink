@@ -72,6 +72,7 @@ Contributor(s):
     <mapping resource="emidetail/database/beans/LinkStands.hbm.xml"/>
     <mapping resource="emidetail/database/beans/LinkTrays.hbm.xml"/>
     <mapping resource="emidetail/database/beans/AdditionTrays.hbm.xml"/>
+    <mapping resource="emidetail/database/beans/DonnOsnovanie.hbm.xml"/>
     
   </session-factory>
 </hibernate-configuration>
