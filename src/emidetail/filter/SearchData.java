@@ -5,6 +5,7 @@
  */
 package emidetail.filter;
 
+import emidetail.manager.data.Gabarit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -188,36 +189,6 @@ public class SearchData {
 
     public void clearSource() {
         sources.clear(); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    
-    
-    public class Gabarit {
-        private int height = 0;
-        private int width = 0;
-        private int length = 0;
-        
-        public Gabarit () {
-            
-        }
-        
-        public Gabarit(int h, int w, int l) {
-            height = h;
-            width = w;
-            length = l;
-        }
-        
-        public int getH(){
-            return height;
-        }
-        
-        public int getW(){
-            return width;
-        }
-        
-        public int getL(){
-            return length;
-        }
     }
 
     /**

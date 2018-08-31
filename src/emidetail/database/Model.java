@@ -228,7 +228,7 @@ public class Model extends Observable{
     
     public Model(){
         
-        initAddTrays();
+        
         
         trayses = TraysFunctions.selectTrays();
         connects = ConnectorFunctions.selectConnector();
@@ -371,7 +371,7 @@ public class Model extends Observable{
         length_list = FXCollections.observableArrayList(lengthlist);
         
        
-        
+        initAddTrays();
     }
     
     

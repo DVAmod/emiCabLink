@@ -12,6 +12,7 @@ import org.hibernate.Session;
 import emidetail.database.beans.Profil;
 import emidetail.database.beans.Stand;
 import emidetail.filter.SearchData;
+import emidetail.manager.data.Gabarit;
 import org.hibernate.HibernateException;
 
 /**
@@ -67,7 +68,7 @@ public class ProfilFunctions {
             criteria = criteria + " p.constructionId="+filter.getSource();
         }
 
-        SearchData.Gabarit gab = filter.getGabarit();
+        Gabarit gab = filter.getGabarit();
         if (gab!=null) {
 
             if (gab.getH() > 0){

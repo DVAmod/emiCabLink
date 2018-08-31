@@ -12,6 +12,7 @@ import org.hibernate.Session;
 
 import emidetail.database.beans.Trays;
 import emidetail.filter.SearchData;
+import emidetail.manager.data.Gabarit;
 import org.hibernate.HibernateException;
 
 /**
@@ -100,7 +101,7 @@ public class TraysFunctions {
                 criteria = criteria + " t.constructionId="+filter.getSource();
             }
             
-            SearchData.Gabarit gab = filter.getGabarit();
+            Gabarit gab = filter.getGabarit();
             if (gab!=null) {
                 
                 if (gab.getH() > 0){

@@ -7,6 +7,7 @@ package emidetail.database.utils;
 
 import emidetail.database.beans.AdditionTrays;
 import emidetail.filter.SearchData;
+import emidetail.manager.data.Gabarit;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.HibernateException;
@@ -110,7 +111,7 @@ public class AdditionTraysFunctions {
                 criteria = criteria + " t.constructionId="+filter.getSource();
             }
             
-            SearchData.Gabarit gab = filter.getGabarit();
+            Gabarit gab = filter.getGabarit();
             if (gab!=null) {
                 
                 if (gab.getH() > 0){
