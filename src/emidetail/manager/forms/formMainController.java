@@ -511,6 +511,8 @@ public class formMainController implements Initializable, Observer {
     private Pane locAcsTrayType;
     @FXML
     private Pane locCablePane;
+    @FXML
+    private TextField locCableQuid;
     
     
     public void initUnit(){
@@ -567,7 +569,13 @@ public class formMainController implements Initializable, Observer {
     public void initOtherConstruction(){
         
         List<String> methodsElement = Arrays.asList(CablingCalc.CAB_CONF);
+        List<String> methodsElement1 = Arrays.asList(CablingCalc.CAB_CONF1);
+        List<String> methodsElement2 = Arrays.asList(CablingCalc.CAB_CONF2);
+        List<String> methodsElement3 = Arrays.asList(CablingCalc.CAB_CONF3);
         CablingMethod1.setItems(FXCollections.observableList(methodsElement));
+        CablingMethod2.setItems(FXCollections.observableList(methodsElement1));
+        CablingMethod3.setItems(FXCollections.observableList(methodsElement2));
+        CablingMethod4.setItems(FXCollections.observableList(methodsElement3));
         cabCalc = new CablingCalc();
         
         
@@ -1579,18 +1587,14 @@ public class formMainController implements Initializable, Observer {
             }
         }
     }
-
-    @FXML
-    private void onCalcCables(ActionEvent event) {
-        
-        clearCablingView();
-        
+    
+    private Gabarit inputCablingValue(int value) {
         int type = 0;
         float input_diam = 1f;
         int count_cab = 1;
         
         try{
-            switch (change_cab) {
+            switch (value) {
                 case 1: type = 1 + CablingMethod1.getSelectionModel().getSelectedIndex();
                         count_cab = Integer.valueOf(locCabelCount1.getText());
                         input_diam = Float.valueOf(locCableDiametr1.getText());
@@ -1611,194 +1615,52 @@ public class formMainController implements Initializable, Observer {
             }
         }catch(Exception e) {
             System.err.println(" Not find numeric parametr for calc");
+            return null;
         }
+        
+        return new Gabarit(input_diam, count_cab, type);
+    }
+
+    @FXML
+    private void onCalcCables(ActionEvent event) {
+        
+        this.clearCablingView();
+        
+        int type = 0;
+        float input_diam = 1f;
+        int count_cab = 1;
            
         ConstructCablingView.input(locCablePane, cabCalc);
-        ConstructCablingView.addData(input_diam, count_cab, type);
-        ConstructCablingView.show(change_cab);
+        ConstructCablingView.addData(this.inputCablingValue(change_cab));
+        
         // Start calculate
-        /*
-        if (change_cab > 0 && type>0) {
-           
-           
-        boolean result_cabcalc =
-           cabCalc.calc(new Gabarit(input_diam, count_cab, type), change_cab);
-
-            int startX = 250;
-            int startY = 25;
-
-            float th = cabCalc.trayHeight;
-            float tw = cabCalc.trayWidth;
-            
-            
-            System.out.println("res ="+result_cabcalc+"  th="+th+"   tw="+tw);
-
-            float ph = 200f;
-            float pw = 400f;
-
-            double kof1 = (ph-5)/th;
-            double kof2 = (pw-10)/tw;
-            double endH = th*kof1;
-            double endW = tw*kof1;
-            double rad = Math.round((input_diam)/2);
-            if (endW > pw) {
-                endH = th*kof2;
-                endW = tw*kof2;
-                rad = rad*kof2;
-            } else {
-                rad = rad*kof1;
-            }
-
-                Rectangle rect1 = new Rectangle(startX, startY-2, endW, endH);
-                rect1.setFill(Color.CADETBLUE);
-                rect1.setId("rectangle");
-
-                //Transparent rectangle with Stroke
-                Rectangle rect2 = new Rectangle(startX, startY, endW, endH);
-                rect2.setFill(Color.TRANSPARENT);
-                rect2.setStroke(Color.BLACK);
-                rect2.setStrokeWidth(4);
-                rect2.setId("rectangle");
-
-                locCablePane.getChildren().addAll(rect2,rect1);
-
-
-
-            startY = (int) (startY + (float)endH - 2.5f - rad);
-            startX = (int) (startX + 2 + rad);    
-
-
-            if (type==1 || type==2) {
-                if ( type == 2 ) {
-                    count_cab = count_cab*2;
-                }
-                Rectangle rect3 = new Rectangle(startX-rad-1, startY-rad+1, rad*count_cab*2+3, 2*rad+3);
-                rect3.setFill(Color.BLUE);
-                //rect3.setOpacity(.7);
-                rect3.setId("rectangle");
-                locCablePane.getChildren().add(rect3);
-
-                for (int i = 0; i < count_cab; i++) {
-                    //Rectangle with Stroke, no Fill color specified
-                    Circle ci3 = null;
-                    if ( type == 2 ) {
-                        if (i%2==0)
-                            ci3 = new Circle(startX+ rad*i*2, startY, rad);
-                    } else {
-                        ci3 = new Circle(startX+ rad*i*2, startY, rad);
-                    }
-                    if (ci3!=null) {
-                        ci3.setFill(Color.GREEN);
-                        ci3.setStroke(Color.BLACK);
-                        ci3.setStrokeWidth(2);
-                        ci3.setOpacity(.6);
-                        ci3.setId("circle");
-                        locCablePane.getChildren().add(ci3);
-                    }
-                }
-
-            }
-            if (type==3 || type==4) {
-                int level = cabCalc.getLevel();
-                int count_c = (int) Math.round(Math.ceil((double)count_cab/cabCalc.getLevel()));
-                int old_startX = startX;
-                
-                if (type==4) {
-                    startY = startY+6;
-                    startX = startX-2;
-                    rad = rad*0.87;
-                } else {
-                    rad = rad*0.95;
-                }
-
-                Rectangle rect3 = null;
-                if (type==3)
-                    rect3 = new Rectangle(startX-rad-1, startY-(2*rad*level+1-rad), 2*rad*count_c+2, 2*rad*level+3);
-                else if (type==4) {
-                    //rect3 = new Rectangle(startX-rad-1, startY-(2*rad*level+1.15*rad)+2, 2*rad*count_c+0.5*rad+2, 2*rad*level+2*rad-2);
-                    //int count_c2 = (int)Math.floor(count_cab/2);
-                    Ellipse ca = new Ellipse(startX+rad*count_c-0.8*rad, startY-(rad*level)+2,rad*count_c+0.4*rad ,rad*level+0.5*rad);
-                    ca.setFill(Color.BLUE);
-                    ca.setStroke(Color.BLACK);
-                    ca.setStrokeWidth(3);
-                    ca.setOpacity(0.6);
-                    ca.setId("circle");
-                    locCablePane.getChildren().add(ca);
-                    //System.out.println("c="+count_cab+"  cr="+Math.ceil((double)count_cab/2));
-                }
-                if (rect3!=null && type==3) {    
-                    rect3.setFill(Color.BLUE);
-                    rect3.setOpacity(.5);
-                    rect3.setId("rectangle");
-                    locCablePane.getChildren().add(rect3);
-                }
-                for (int j = 0; j < level; j++) {
-                    if ( j > 0) {
-                        startY = (int) (startY - 2*rad );
-                    } else if (type==4) {
-                        startX = (int) (startX + 0.3*rad);
-                        startY = (int) (startY - 0.8*rad);
-                    }
-                    if (type==4) {
-
-                    }
-                    for (int i = 0; i < count_c; i++) {
-                        //Rectangle with Stroke, no Fill color specified
-                        Circle ci3 = null;
-                        if ( type == 4 ) {
-                            if (j==0 || j==level-1) {
-                                if (count_c < 6) {
-                                    if (i==0) continue;
-                                    if (i==count_c-1) continue;
-                                } else {
-                                    if (i==0 || i==1) continue;
-                                    if (i==count_c-1 || i==count_c-2) continue;
-                                }
-                            }
-                            
-
-                            ci3 = new Circle(startX+ rad*i*2, startY+1, rad);
-                        } else {
-                            ci3 = new Circle(startX+ rad*i*2, startY+1, rad);
-                        }
-                        if (ci3!=null) {
-                            ci3.setFill(Color.GREEN);
-                            ci3.setStroke(Color.BLACK);
-                            ci3.setStrokeWidth(2);
-                            ci3.setOpacity(.4);
-                            ci3.setId("circle");
-                            locCablePane.getChildren().add(ci3);
-                        }
-                    }
-                }
-            }
-        }
-        */
+        
+        ConstructCablingView.start();
+        ConstructCablingView.showResult(change_cab);
+        
+        locCableRate.setText(cabCalc.trayWidth + " x "+cabCalc.trayHeight);
+        Float freeDgr = ((cabCalc.width*cabCalc.height))/(cabCalc.trayWidth*cabCalc.trayHeight);
+        locCableQuid.setText(freeDgr.toString());
+        
     }
 
     @FXML
     private void onCancelCables(ActionEvent event) {
     }
 
-    @FXML
     private void onChangeCab1(ActionEvent event) {
         change_cab = 1;
     }
-
-
 
     @FXML
     private void onChangeCab2(InputMethodEvent event) {
         change_cab = 2;
     }
 
-
-
     @FXML
     private void onChangeCab3(InputMethodEvent event) {
         change_cab = 3;
     }
-
 
     @FXML
     private void onChangeCab4(InputMethodEvent event) {
@@ -1807,22 +1669,76 @@ public class formMainController implements Initializable, Observer {
 
     @FXML
     private void onChangeCab1(InputMethodEvent event) {
+        change_cab = 1;
     }
 
-    @FXML
     private void onChangeCab2(ActionEvent event) {
+        change_cab = 2;
     }
 
-    @FXML
     private void onChangeCab3(ActionEvent event) {
+        change_cab = 3;
     }
 
-    @FXML
     private void onChangeCab4(ActionEvent event) {
+        change_cab = 4;
     }
 
     @FXML
     private void onCalcCablesAll(ActionEvent event) {
+        
+        clearCablingView();
+        
+        int type = 0;
+        float input_diam = 1f;
+        int count_cab = 1;
+        
+        cabCalc.clear();
+        
+        for (int index_input = 1; index_input < 5; index_input++) {
+            
+            
+            ConstructCablingView.input(locCablePane, cabCalc);
+            Gabarit gab = this.inputCablingValue(index_input);
+            
+            if (gab!=null) {
+                input_diam = gab.getH();
+                count_cab = (int)gab.getW();
+                type = gab.getL();
+            
+                ConstructCablingView.addData(input_diam,count_cab,type);
+            }
+            //ConstructCablingView.showAllResult(index_input-1);
+            
+        }
+        
+        
+            ConstructCablingView.showAllResult(1);
+            
+            locCableRate.setText(cabCalc.trayWidth + " x "+cabCalc.trayHeight);
+            Float freeDgr = ((cabCalc.width*cabCalc.height)/1.2f)/(cabCalc.trayWidth*cabCalc.trayHeight);
+            locCableQuid.setText(freeDgr.toString());
+        
+    }
+
+    @FXML
+    private void onChangeCab11(ActionEvent event) {
+        change_cab = 1;
+    }
+
+    @FXML
+    private void onChangeCab22(ActionEvent event) {
+        change_cab = 2;
+    }
+
+    @FXML
+    private void onChangeCab33(ActionEvent event) {
+        change_cab = 3;
+    }
+
+    @FXML
+    private void onChangeCab44(ActionEvent event) {
+        change_cab = 4;
     }
 
 

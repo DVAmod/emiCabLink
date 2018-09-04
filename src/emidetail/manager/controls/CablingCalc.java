@@ -21,12 +21,25 @@ public class CablingCalc {
     public static String CAB_CONF[] = {"Однослойный",
     "Однослойный через диаметр","Многослойный","Пучком"};
     
+    public static String CAB_CONF1[] = {"Однослойный",
+    "Однослойный через диаметр","Многослойный","Пучком"};
+    
+    public static String CAB_CONF2[] = {"Однослойный",
+    "Однослойный через диаметр","Многослойный","Пучком"};
+    
+    public static String CAB_CONF3[] = {"Однослойный",
+    "Однослойный через диаметр","Многослойный","Пучком"};
+    
     private ArrayList<Float> diametrs;
     private ArrayList<Integer> counts;
     private ArrayList<Integer> types;
     
-    private Float width;
-    private Float height;
+    private ArrayList<Float> widths;
+    private ArrayList<Float> heights;
+    
+    public Float width;
+    public Float height;
+    
     private int level = 1;
     private int dataindex = -1;
     private int index = 0;
@@ -36,6 +49,26 @@ public class CablingCalc {
     
     public Integer trayWidth;
     public Integer trayHeight;
+    
+    public Integer getDataIndex(){
+        return widths.size();
+    }
+    
+    public Integer getWidth(int i) {
+        return  widths.get(i).intValue();
+    }
+    
+    public Float getDiametr(int i){
+        return diametrs.get(i);
+    }
+    
+    public Integer getCount(int i) {
+        return counts.get(i);
+    }
+    
+    public Integer getType(int i) {
+        return types.get(i);
+    }
     
     public Integer getLevel() {
         if (cur_type==0)
@@ -54,6 +87,8 @@ public class CablingCalc {
         diametrs = new ArrayList<Float>();
         counts = new ArrayList<Integer>();
         types = new ArrayList<Integer>();
+        widths = new ArrayList<Float>();
+        heights = new ArrayList<Float>();
         
     }
     
@@ -73,17 +108,72 @@ public class CablingCalc {
     
     public boolean calc (Gabarit inner, int indStr) {
         
-        if (indStr < index) {
-            clear();
-        }
-        if (indStr == index && index >= 0) {
-            this.changeCalcData(inner.getH(), (int) inner.getW(), inner.getL());
+        boolean res = false;
+        if (indStr > 5){
+            //this.addCalcData(inner.getH(), (int) inner.getW(), inner.getL());
+            res = this.calculateAllDiametr();
         } else {
-            this.addCalcData(inner.getH(), (int) inner.getW(), inner.getL());
+            if (indStr < index) {
+                clear();
+            }
+            if (indStr == index && index >= 0) {
+                this.changeCalcData(inner.getH(), (int) inner.getW(), inner.getL());
+            } else {
+                this.addCalcData(inner.getH(), (int) inner.getW(), inner.getL());
+            }
+            index = indStr;
+            res = this.calculateDiametr();
         }
-        index = indStr;
-        boolean res = this.calculateDiametr();
+        
         return res;
+    }
+    
+    public boolean calculateAllDiametr() {
+        width = 0f;
+        height = 0f;
+        widths.clear();
+        heights.clear();
+        
+        if (dataclear) {
+            for (int i = 0; i < types.size(); i++) {
+                Integer type1 = types.get(i);
+                Gabarit res1 = calcMethod(type1,i);
+                float wt = res1.getW();
+                float ht = res1.getH();
+                //width = wt/1.4f;
+                //height = ht*1.4f;
+                widths.add(wt/1.4f);
+                heights.add(ht*1.4f);
+                 
+ 
+            }
+            
+            float max_height = 0;
+            
+            for (int ii = 0; ii< widths.size(); ii++ ) {
+                width += widths.get(ii);
+                Integer type2 = types.get(ii);
+                if (type2==4) {
+                    max_height = (heights.get(ii))/1.4f;
+                }
+                height += heights.get(ii);
+            }
+            
+            height = height/(widths.size()-1);
+            if (height < max_height) height = max_height;
+            
+            
+            dataclear = false;
+        }
+        
+        boolean isfind = false;
+        
+        if (width!=0f && height!=0f) {
+           isfind = calcFiltrTray();
+        }
+        
+        return isfind;
+        
     }
     
     public void clear () {
@@ -162,28 +252,24 @@ public class CablingCalc {
         return false;    
     }
     
-    private Gabarit calcMethod(int type) {
+    public Gabarit calcMethod(int type, int index1) {
         Gabarit result = null;
         switch (type) {
             case 1:
-                if (!checkData(diametrs.get(dataindex), counts.get(dataindex))) break;
-                result = cals1(diametrs.get(dataindex), counts.get(dataindex));
-
+                if (!checkData(diametrs.get(index1), counts.get(index1))) break;
+                result = cals1(diametrs.get(index1), counts.get(index1));
                 break;
             case 2:
-                if (!checkData(diametrs.get(dataindex), counts.get(dataindex))) break;
-                result = cals2(diametrs.get(dataindex), counts.get(dataindex));
-
+                if (!checkData(diametrs.get(index1), counts.get(index1))) break;
+                result = cals2(diametrs.get(index1), counts.get(index1));
                 break;    
             case 3:
-                if (!checkData(diametrs.get(dataindex), counts.get(dataindex))) break;
-                result = cals3(diametrs.get(dataindex), counts.get(dataindex));
-
+                if (!checkData(diametrs.get(index1), counts.get(index1))) break;
+                result = cals3(diametrs.get(index1), counts.get(index1));
                 break;    
             case 4:
-                if (!checkData(diametrs.get(dataindex), counts.get(dataindex))) break;
-                result = cals4(diametrs.get(dataindex), counts.get(dataindex));
-
+                if (!checkData(diametrs.get(index1), counts.get(index1))) break;
+                result = cals4(diametrs.get(index1), counts.get(index1));
                 break;    
             
         }
@@ -198,7 +284,7 @@ public class CablingCalc {
         if (dataclear) {
             for (int i = 0; i < types.size(); i++) {
                 Integer type1 = types.get(i);
-                 Gabarit res1 = calcMethod(type1);
+                 Gabarit res1 = calcMethod(type1,dataindex);
                  float wt = res1.getW();
                  float ht = res1.getH();
                  if (wt > width) width = wt;
@@ -207,7 +293,7 @@ public class CablingCalc {
             }
             dataclear = false;
         } else {
-            Gabarit res = calcMethod(types.get(dataindex));
+            Gabarit res = calcMethod(types.get(dataindex), dataindex);
             width = res.getW();
             height = res.getH();
         }

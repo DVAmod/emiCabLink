@@ -320,18 +320,18 @@
                                                                                           <Font size="13.0" />
                                                                                        </font>
                                                                                     </Label>
-                                                                                    <ComboBox fx:id="CablingMethod1" layoutX="372.0" layoutY="105.0" onAction="#onChangeCab1" prefHeight="25.0" prefWidth="183.0" />
+                                                                                    <ComboBox fx:id="CablingMethod1" layoutX="372.0" layoutY="105.0" onAction="#onChangeCab11" prefHeight="25.0" prefWidth="183.0" />
                                                                                     <TextField fx:id="locCabelCount1" layoutX="204.0" layoutY="105.0" onInputMethodTextChanged="#onChangeCab1" prefHeight="25.0" prefWidth="106.0" />
                                                                                     <TextField fx:id="locCableDiametr1" layoutX="23.0" layoutY="105.0" onInputMethodTextChanged="#onChangeCab1" prefHeight="25.0" prefWidth="114.0" />
                                                                                     <TextField fx:id="locCableDiametr2" layoutX="23.0" layoutY="154.0" onInputMethodTextChanged="#onChangeCab2" prefHeight="25.0" prefWidth="115.0" />
                                                                                     <TextField fx:id="locCabelCount2" layoutX="204.0" layoutY="154.0" onInputMethodTextChanged="#onChangeCab2" prefHeight="25.0" prefWidth="109.0" />
-                                                                                    <ComboBox fx:id="CablingMethod2" layoutX="372.0" layoutY="154.0" onAction="#onChangeCab2" prefHeight="25.0" prefWidth="182.0" />
+                                                                                    <ComboBox fx:id="CablingMethod2" layoutX="372.0" layoutY="154.0" onAction="#onChangeCab22" prefHeight="25.0" prefWidth="182.0" />
                                                                                     <TextField fx:id="locCableDiametr3" layoutX="23.0" layoutY="204.0" onInputMethodTextChanged="#onChangeCab3" prefHeight="25.0" prefWidth="115.0" />
                                                                                     <TextField fx:id="locCabelCount3" layoutX="204.0" layoutY="204.0" onInputMethodTextChanged="#onChangeCab3" prefHeight="25.0" prefWidth="109.0" />
-                                                                                    <ComboBox fx:id="CablingMethod3" layoutX="372.0" layoutY="204.0" onAction="#onChangeCab3" prefHeight="25.0" prefWidth="180.0" />
+                                                                                    <ComboBox fx:id="CablingMethod3" layoutX="372.0" layoutY="204.0" onAction="#onChangeCab33" prefHeight="25.0" prefWidth="180.0" />
                                                                                     <TextField fx:id="locCableDiametr4" layoutX="23.0" layoutY="252.0" onInputMethodTextChanged="#onChangeCab4" prefHeight="25.0" prefWidth="115.0" />
                                                                                     <TextField fx:id="locCabelCount4" layoutX="204.0" layoutY="252.0" onInputMethodTextChanged="#onChangeCab4" prefHeight="25.0" prefWidth="109.0" />
-                                                                                    <ComboBox fx:id="CablingMethod4" layoutX="372.0" layoutY="252.0" onAction="#onChangeCab4" prefHeight="25.0" prefWidth="181.0" />
+                                                                                    <ComboBox fx:id="CablingMethod4" layoutX="372.0" layoutY="252.0" onAction="#onChangeCab44" prefHeight="25.0" prefWidth="181.0" />
                                                                                     <ImageView fx:id="locHintView" accessibleText="Диаметры кабелей по типам" cache="true" cacheHint="SPEED" fitHeight="30.0" fitWidth="35.0" layoutX="118.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
                                                                                        <cursor>
                                                                                           <Cursor fx:constant="HAND" />
@@ -342,16 +342,18 @@
                                                                               <Separator orientation="VERTICAL" prefHeight="200.0" />
                                                                               <Pane fx:id="locCablePane" prefHeight="333.0" prefWidth="634.0">
                                                                                  <children>
-                                                                                    <Label layoutX="14.0" layoutY="60.0" text="Результат вычисления">
+                                                                                    <Label layoutX="31.0" layoutY="21.0" text="Результат вычисления">
                                                                                        <font>
-                                                                                          <Font size="13.0" />
+                                                                                          <Font name="System Bold" size="13.0" />
                                                                                        </font>
                                                                                     </Label>
                                                                                     <ImageView fx:id="locCableView" fitHeight="232.0" fitWidth="385.0" layoutX="209.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true" style="border: 1;" />
-                                                                                    <Label layoutX="52.0" layoutY="157.0" text="Размеры лотка, мм" />
-                                                                                    <TextField fx:id="locCableRate" editable="false" layoutX="42.0" layoutY="184.0" />
+                                                                                    <Label layoutX="19.0" layoutY="158.0" text="Площадь сечения к площади лотка" />
+                                                                                    <TextField fx:id="locCableQuid" editable="false" layoutX="42.0" layoutY="184.0" />
                                                                                     <Button layoutX="31.0" layoutY="234.0" mnemonicParsing="false" onAction="#onGotoTray" prefHeight="25.0" prefWidth="170.0" text="К выбранным лоткам" />
                                                                                     <Button layoutX="42.0" layoutY="277.0" mnemonicParsing="false" onAction="#onCancelCables" text="Вернутся (без изменений)" />
+                                                                                    <Label layoutX="28.0" layoutY="94.0" text="Размеры лотка, мм" />
+                                                                                    <TextField fx:id="locCableRate" editable="false" layoutX="42.0" layoutY="121.0" />
                                                                                  </children>
                                                                               </Pane>
                                                                            </children>
