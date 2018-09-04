@@ -46,6 +46,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -416,9 +417,9 @@ public class formMainController implements Initializable, Observer {
     @FXML
     private DatePicker locProjectDate;
     @FXML
-    private ComboBox<?> locComboClass;
+    private ComboBox<String> locComboClass;
     @FXML
-    private ComboBox<?> locComboStyles;
+    private ComboBox<String> locComboStyles;
     @FXML
     private ImageView locStandImage;
     @FXML
@@ -578,6 +579,10 @@ public class formMainController implements Initializable, Observer {
         CablingMethod4.setItems(FXCollections.observableList(methodsElement3));
         cabCalc = new CablingCalc();
         
+        
+        locComboClass.setItems(Model.getInstance().type_all_list);
+        
+        locComboStyles.setItems(Model.getInstance().type_obraz_list);
         
         colAcsDesc.setCellValueFactory(new PropertyValueFactory<>("definition"));
         colAcsArticul.setCellValueFactory(new PropertyValueFactory<>("articul"));
@@ -2175,6 +2180,9 @@ public class formMainController implements Initializable, Observer {
     private void AddReportValues(int state, SectionValue vals, String code) {
         String temp = "";
         Report rep = null;
+        float mass_dec = 0;
+        DecimalFormat df = new DecimalFormat("#.###");
+
         if (state == 1 ) {
             rep = new Report();
             //temp = Model.getInstance().selectTray.getTitleDisplay()+"   "+vals.countSection;
@@ -2191,6 +2199,8 @@ public class formMainController implements Initializable, Observer {
             mass_tr = mass_tr.replace(",", ".");
             rep.setMass(Float.valueOf(mass_tr));
             rep.setIndex(Model.getInstance().TRAY_INDEX);
+            mass_dec = Float.valueOf(df.format(rep.getMass()));
+            rep.setMass(mass_dec);
             Model.getInstance().addReport( rep);
         }
         if (state == 2) {
@@ -2217,7 +2227,8 @@ public class formMainController implements Initializable, Observer {
                 mass_con = mass_con.replace(",", ".");
                 rep.setMass(Float.valueOf(mass_con));
                 rep.setIndex(Model.getInstance().CON_INDEX);
-
+                mass_dec = Float.valueOf(df.format(rep.getMass()));
+                rep.setMass(mass_dec);
                 Model.getInstance().addReport(rep);
                 
                  Model.getInstance().metis_list.clear();
@@ -2238,7 +2249,8 @@ public class formMainController implements Initializable, Observer {
                         rep.setMass(Float.valueOf(Model.getInstance().mass_list.get(0).replace(",", ".")));
                         rep.setIndex(Model.getInstance().METIS_INDEX);
                         rep.setParent(Model.getInstance().getLastReport().getId());
-
+                        mass_dec = Float.valueOf(df.format(rep.getMass()));
+                        rep.setMass(mass_dec);
                         Model.getInstance().addReport(rep);
                     }
             
@@ -2276,6 +2288,8 @@ public class formMainController implements Initializable, Observer {
                     rep.setMass(Float.valueOf(coverSel.getMass().replace(",",".")));
                     rep.setIndex(Model.getInstance().COV_INDEX);
 
+                    mass_dec = Float.valueOf(df.format(rep.getMass()));
+                    rep.setMass(mass_dec);
                     Model.getInstance().addReport( rep);
 
                     
@@ -2324,6 +2338,8 @@ public class formMainController implements Initializable, Observer {
                             rep.setComment("");
                             rep.setMass(Float.valueOf(claims.get(0).getMass().replace(",", ".")));
                             rep.setIndex(5);
+                            mass_dec = Float.valueOf(df.format(rep.getMass()));
+                            rep.setMass(mass_dec);
                             Model.getInstance().addReport(rep);
                         }
                     
@@ -2352,6 +2368,8 @@ public class formMainController implements Initializable, Observer {
                             rep.setComment("");
                             rep.setMass(Float.valueOf(metises.get(0).getMass().replace(",", ".")));
                             rep.setIndex(5);
+                            mass_dec = Float.valueOf(df.format(rep.getMass()));
+                            rep.setMass(mass_dec);
                             Model.getInstance().addReport(rep);
                         }
                 }
@@ -2419,6 +2437,8 @@ public class formMainController implements Initializable, Observer {
                         rep.setComment("");
                         rep.setMass(Float.valueOf(claims.get(0).getMass().replace(",", ".")));
                         rep.setIndex(5);
+                        mass_dec = Float.valueOf( df.format(rep.getMass()));
+                        rep.setMass(mass_dec);
                         Model.getInstance().addReport(rep);
                     }
                 
@@ -2442,6 +2462,8 @@ public class formMainController implements Initializable, Observer {
                             rep.setComment("");
                             rep.setMass(Float.valueOf(metises.get(0).getMass().replace(",", ".")));
                             rep.setIndex(5);
+                            mass_dec = Float.valueOf(df.format(rep.getMass()));
+                            rep.setMass(mass_dec);
                             Model.getInstance().addReport(rep);
                         }
                     if (!covisFind && covis==2) {
@@ -2461,6 +2483,8 @@ public class formMainController implements Initializable, Observer {
                             rep.setComment("");
                             rep.setMass(Float.valueOf(metises.get(0).getMass().replace(",", ".")));
                             rep.setIndex(5);
+                            mass_dec = Float.valueOf(df.format(rep.getMass()));
+                            rep.setMass(mass_dec);
                             Model.getInstance().addReport(rep);
                         }
                     }
@@ -2484,6 +2508,8 @@ public class formMainController implements Initializable, Observer {
                     rep.setComment("вес за штуку");
                     rep.setMass(Float.valueOf(divider.getMass().replace(",", ".")));
                     rep.setIndex(5);
+                    mass_dec = Float.valueOf(df.format(rep.getMass()));
+                    rep.setMass(mass_dec);
                     Model.getInstance().addReport(rep);
                     int typeId = 4;
                     if (divider.getConstructionId() > 1) {
@@ -2512,6 +2538,8 @@ public class formMainController implements Initializable, Observer {
                             rep.setComment("");
                             rep.setMass(Float.valueOf(metises.get(0).getMass().replace(",", ".")));
                             rep.setIndex(5);
+                            mass_dec = Float.valueOf(df.format(rep.getMass()));
+                            rep.setMass(mass_dec);
                             Model.getInstance().addReport(rep);
                         }
                 }
@@ -2549,6 +2577,8 @@ public class formMainController implements Initializable, Observer {
                         rep.setComment("");
                         rep.setMass(Float.valueOf(innerClaims.get(0).getMass().replace(",", ".")));
                         rep.setIndex(5);
+                        mass_dec = Float.valueOf(df.format(rep.getMass()));
+                        rep.setMass(mass_dec);
                         Model.getInstance().addReport(rep);
                     }
             }
@@ -2571,6 +2601,8 @@ public class formMainController implements Initializable, Observer {
             rep.setMass(Float.valueOf(locAcsTable.getSelectionModel().getSelectedItem().getMass().replace(",", ".")));
             rep.setDescription("АО «СЗ ЭМИ»");
             rep.setComment("");
+            mass_dec = Float.valueOf(df.format(rep.getMass()));
+            rep.setMass(mass_dec);
             Model.getInstance().addReport(rep);
         }
         if (state == 4) {
@@ -2584,6 +2616,8 @@ public class formMainController implements Initializable, Observer {
             rep.setIndex(Model.getInstance().STAND_INDEX);
             rep.setDescription("АО «СЗ ЭМИ»");
             rep.setComment("");
+            mass_dec = Float.valueOf(df.format(rep.getMass()));
+            rep.setMass(mass_dec);
             Model.getInstance().addReport(rep);
         }
         if (state == 5) {
@@ -2606,6 +2640,8 @@ public class formMainController implements Initializable, Observer {
             rep.setIndex(Model.getInstance().PROF_INDEX);
             rep.setDescription("АО «СЗ ЭМИ»");
             rep.setComment("");
+            mass_dec = Float.valueOf(df.format(rep.getMass()));
+            rep.setMass(mass_dec);
             Model.getInstance().addReport(rep);
             
             
@@ -2626,6 +2662,8 @@ public class formMainController implements Initializable, Observer {
             rep.setIndex(Model.getInstance().PROF_INDEX);
             rep.setDescription("АО «СЗ ЭМИ»");
             rep.setComment("");
+            mass_dec = Float.valueOf(df.format(rep.getMass()));
+            rep.setMass(mass_dec);
             Model.getInstance().addReport(rep);
             
         }
@@ -2656,6 +2694,8 @@ public class formMainController implements Initializable, Observer {
                 rep.setIndex(3);
                 rep.setDescription("АО «СЗ ЭМИ»");
                 rep.setComment("");
+                mass_dec = Float.valueOf(df.format(rep.getMass()));
+                rep.setMass(mass_dec);
                 Model.getInstance().addReport(rep);
             }
             if (code2 == 2 ) {
@@ -2677,6 +2717,8 @@ public class formMainController implements Initializable, Observer {
                 rep.setIndex(3);
                 rep.setDescription("АО «СЗ ЭМИ»");
                 rep.setComment("");
+                mass_dec = Float.valueOf(df.format(rep.getMass()));
+                rep.setMass(mass_dec);
                 Model.getInstance().addReport(rep);
             }
             if (code2 == 3 ) {
@@ -2698,6 +2740,8 @@ public class formMainController implements Initializable, Observer {
                 rep.setIndex(3);
                 rep.setDescription("АО «СЗ ЭМИ»");
                 rep.setComment("");
+                mass_dec = Float.valueOf(df.format(rep.getMass()));
+                rep.setMass(mass_dec);
                 Model.getInstance().addReport(rep);
             }
             

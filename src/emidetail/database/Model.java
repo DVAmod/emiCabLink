@@ -147,6 +147,10 @@ public class Model extends Observable{
     
     public List<String> mass_list = new ArrayList<String>();
     
+    public ObservableList<String> type_all_list;
+    
+    public ObservableList<String> type_obraz_list;
+    
     public ObservableList<Trays> tlist;
     
     public ObservableList<Trays> flist;
@@ -406,12 +410,12 @@ public class Model extends Observable{
                 
         List<String> addsourcelist = new ArrayList<String>();
         addsourcelist.add("");
-        addsourcelist.add("Исполнение 1");
-        addsourcelist.add("Исполнение 2");
-        addsourcelist.add("Исполнение 3");
-        addsourcelist.add("Исполнение 4");
-        addsourcelist.add("Исполнение 5");
-        addsourcelist.add("Исполнение 6");
+        addsourcelist.add(" 1  (SR)");
+        addsourcelist.add(" 2  (HZ)");
+        addsourcelist.add(" 3  (G)");
+        addsourcelist.add(" 4  (X)");
+        addsourcelist.add(" 5  (L)");
+        addsourcelist.add(" 6  (RL)");
         addsource_list = FXCollections.observableArrayList(addsourcelist);
         
         List<String> addwidthlist = new ArrayList<String>();
@@ -589,6 +593,13 @@ public class Model extends Observable{
             
             List<String> typebrackets = Arrays.asList("","SMA","SM","СНК","BSU","BSI");
             type_bracket_list = FXCollections.observableArrayList(typebrackets);
+            
+            List<String> typeslist = Arrays.asList("","СНК","SM","НК","BS");
+            type_all_list = FXCollections.observableArrayList(typeslist);
+            
+            List<String> obrazlist = Arrays.asList("","S-образный","П-образный","I-образный","Z-образный","L-образный");
+            type_obraz_list = FXCollections.observableArrayList(obrazlist);
+            
             
             List<String> thsbracket = Arrays.asList("","2,0", "2,5", "3,0","4,0","5,0","8,0");
              ths_bracket_list = FXCollections.observableArrayList(thsbracket);

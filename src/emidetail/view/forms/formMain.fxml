@@ -59,8 +59,8 @@
                                                    <children>
                                                       <ComboBox fx:id="locTrayType" layoutX="91.0" layoutY="15.0" onAction="#handleTypeAction" prefWidth="150.0" />
                                                       <ComboBox fx:id="locTraySource" layoutX="91.0" layoutY="55.0" onAction="#handleSourceAction" prefWidth="150.0" />
-                                                      <ComboBox fx:id="locHeight" editable="true" layoutX="316.0" layoutY="14.0" onAction="#handleHeightAction" prefHeight="25.0" prefWidth="96.0" />
-                                                      <ComboBox fx:id="locWidth" editable="true" layoutX="316.0" layoutY="55.0" onAction="#handleWidthAction" prefHeight="25.0" prefWidth="96.0" />
+                                                      <ComboBox fx:id="locHeight" editable="true" layoutX="327.0" layoutY="14.0" onAction="#handleHeightAction" prefHeight="25.0" prefWidth="96.0" />
+                                                      <ComboBox fx:id="locWidth" editable="true" layoutX="327.0" layoutY="55.0" onAction="#handleWidthAction" prefHeight="25.0" prefWidth="96.0" />
                                                       <TextField fx:id="locArtEdit" layoutX="516.0" layoutY="16.0" onKeyReleased="#handleTArtReleased" prefHeight="25.0" prefWidth="115.0" />
                                                       <Label fx:id="locArtLabel" layoutX="453.0" layoutY="19.0" text="Артикул:" textFill="#9a2222">
                                                          <font>
@@ -77,17 +77,17 @@
                                                             <Font size="13.0" />
                                                          </font>
                                                       </Label>
-                                                      <Label layoutX="268.0" layoutY="17.0" text="Высота:">
+                                                      <Label layoutX="254.0" layoutY="17.0" text="Высота,мм:">
                                                          <font>
                                                             <Font size="13.0" />
                                                          </font>
                                                       </Label>
-                                                      <Label layoutX="260.0" layoutY="58.0" text="Ширина:" translateX="1.0">
+                                                      <Label layoutX="251.0" layoutY="58.0" text="Ширина,мм:" translateX="1.0">
                                                          <font>
                                                             <Font size="13.0" />
                                                          </font>
                                                       </Label>
-                                                      <Label fx:id="locLengthLabel" layoutX="446.0" layoutY="57.0" text="Длина секции:" textFill="#0a0a0a">
+                                                      <Label fx:id="locLengthLabel" layoutX="432.0" layoutY="57.0" text="Длина секции,мм:" textFill="#0a0a0a">
                                                          <font>
                                                             <Font size="13.0" />
                                                          </font>
@@ -104,7 +104,7 @@
                                                       <Separator layoutX="248.0" orientation="VERTICAL" prefHeight="103.0" prefWidth="6.0" />
                                                       <Separator layoutX="871.0" layoutY="-4.0" orientation="VERTICAL" prefHeight="98.0" prefWidth="5.0" />
                                                       <Label layoutX="701.0" layoutY="63.0" prefHeight="75.0" prefWidth="161.0" />
-                                                      <Label layoutX="707.0" layoutY="26.0" text="Толщина:" />
+                                                      <Label layoutX="705.0" layoutY="26.0" text="Толщина,мм:" />
                                                       <Button layoutX="897.0" layoutY="52.0" mnemonicParsing="false" onAction="#handleFilterClear" text="Сбросить фильтры" />
                                                       <CheckBox fx:id="locIP44Box" layoutX="898.0" layoutY="17.0" mnemonicParsing="false" onAction="#handleIP44Select" prefHeight="17.0" prefWidth="117.0" text="IP 44 фильтр" textFill="#902525">
                                                          <font>
@@ -201,12 +201,12 @@
                                                                                        </font>
                                                                                     </Button>
                                                                                     <Spinner fx:id="locRoadEdit" editable="true" layoutX="204.0" layoutY="63.0" prefHeight="25.0" prefWidth="107.0" />
-                                                                                    <Label layoutX="12.0" layoutY="66.0" text="Введите длину каб. трассы" textFill="#943333">
+                                                                                    <Label layoutY="66.0" text="Введите длину каб. трассы, м" textFill="#943333">
                                                                                        <font>
                                                                                           <Font name="System Bold Italic" size="13.0" />
                                                                                        </font>
                                                                                     </Label>
-                                                                                    <Label layoutX="14.0" layoutY="25.0" prefHeight="19.0" prefWidth="177.0" text="Шаг креплений составляет:">
+                                                                                    <Label layoutY="25.0" prefHeight="19.0" prefWidth="191.0" text="Шаг креплений составляет, м:">
                                                                                        <font>
                                                                                           <Font size="13.0" />
                                                                                        </font>
@@ -394,18 +394,26 @@
                                                 <Pane layoutX="68.0" layoutY="14.0" prefHeight="94.0" prefWidth="1240.0" AnchorPane.bottomAnchor="577.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <children>
                                                         <Label fx:id="label" layoutX="113.0" minHeight="16" minWidth="69" prefHeight="33.0" prefWidth="72.0" />
-                                                        <Button fx:id="buttonFilterClear" layoutX="794.0" layoutY="33.0" onAction="#handleClearProfil" text="Сбросить фильтр">
+                                                        <Button fx:id="buttonFilterClear" layoutX="499.0" layoutY="42.0" onAction="#handleClearProfil" text="Сбросить фильтр">
                                                          <font>
                                                             <Font size="13.0" />
                                                          </font>
                                                       </Button>
-                                                      <CheckBox fx:id="locCheckTrayPr" layoutX="76.0" layoutY="38.0" mnemonicParsing="false" onAction="#handleLoadTrayPr" text="Захватить настройки от лотка">
+                                                      <CheckBox fx:id="locCheckTrayPr" layoutX="76.0" layoutY="38.0" mnemonicParsing="false" onAction="#handleLoadTrayPr" text="Захватить настройки от лотка" visible="false">
                                                          <font>
                                                             <Font size="13.0" />
                                                          </font>
                                                       </CheckBox>
-                                                      <ComboBox fx:id="locComboClass" layoutX="339.0" layoutY="35.0" prefHeight="25.0" prefWidth="180.0" promptText="По классу конструкции" />
-                                                      <ComboBox fx:id="locComboStyles" layoutX="555.0" layoutY="35.0" prefHeight="25.0" prefWidth="180.0" promptText="По виду крепления" />
+                                                      <ComboBox fx:id="locComboClass" layoutX="671.0" layoutY="44.0" prefHeight="25.0" prefWidth="180.0" />
+                                                      <ComboBox fx:id="locComboStyles" layoutX="887.0" layoutY="44.0" prefHeight="25.0" prefWidth="180.0" />
+                                                      <Label layoutX="671.0" layoutY="26.0" text="По серии конструкции:" />
+                                                      <Label layoutX="887.0" layoutY="26.0" text="По типу профиля:" />
+                                                      <CheckBox fx:id="locSimpleCheck" layoutX="62.0" layoutY="48.0" mnemonicParsing="false" onAction="#handleSimpleLinkIn" text="Соответствие консолей и реек">
+                                                         <font>
+                                                            <Font name="System Bold" size="13.0" />
+                                                         </font>
+                                                      </CheckBox>
+                                                      <Separator layoutX="476.0" layoutY="-1.0" orientation="VERTICAL" prefHeight="95.0" prefWidth="13.0" />
                                                    </children>
                                                 </Pane>
                                                 <Accordion fx:id="locSectionAccordion" layoutY="98.0" prefHeight="573.0" prefWidth="1240.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="98.0">
@@ -435,7 +443,7 @@
                                                                                     <TableView fx:id="locStandTable" layoutX="257.0" layoutY="183.0" prefHeight="224.0" prefWidth="334.0" />
                                                                                     <Spinner fx:id="locClaimSpinner" layoutX="165.0" layoutY="279.0" prefHeight="25.0" prefWidth="61.0" />
                                                                                     <Label layoutX="35.0" layoutY="207.0" prefHeight="17.0" prefWidth="74.0" text="Длина, мм" />
-                                                                                    <Label layoutX="26.0" layoutY="240.0" text="Толщина,мм" />
+                                                                                    <Label layoutX="26.0" layoutY="240.0" text="Толщина, мм" />
                                                                                     <Label layoutX="26.0" layoutY="283.0" text="Количество держателей" />
                                                                                     <TextField fx:id="locUnitLength" layoutX="111.0" layoutY="203.0" prefHeight="25.0" prefWidth="115.0" />
                                                                                     <ComboBox fx:id="locUnitThsС" layoutX="109.0" layoutY="236.0" prefHeight="25.0" prefWidth="117.0" />
@@ -470,7 +478,7 @@
                                                                                           <Font size="13.0" />
                                                                                        </font>
                                                                                     </Button>
-                                                                                    <Label layoutX="14.0" layoutY="5.0" prefHeight="19.0" prefWidth="177.0" text="Шаг креплений составляет:">
+                                                                                    <Label layoutX="14.0" layoutY="5.0" prefHeight="19.0" prefWidth="201.0" text="Шаг креплений составляет, м:">
                                                                                        <font>
                                                                                           <Font size="13.0" />
                                                                                        </font>
@@ -505,66 +513,70 @@
                                                                                  <children>
                                                                                     <Pane prefHeight="200.0" prefWidth="200.0">
                                                                                        <children>
-                                                                                          <ListView fx:id="locListStands" layoutX="59.0" layoutY="79.0" onMouseClicked="#handleSelectStand" prefHeight="93.0" prefWidth="420.0" />
+                                                                                          <ListView fx:id="locListStands" layoutX="59.0" layoutY="71.0" onMouseClicked="#handleSelectStand" prefHeight="114.0" prefWidth="420.0" />
                                                                                           <Button defaultButton="true" layoutX="524.0" layoutY="143.0" mnemonicParsing="false" onAction="#handleAddStandsInPr" prefHeight="25.0" prefWidth="125.0" text="Добавить в проект" />
-                                                                                          <Label layoutX="15.0" layoutY="14.0" text="Консоли" />
-                                                                                          <ComboBox fx:id="locStandClass" layoutX="59.0" layoutY="44.0" onAction="#onStandClass" prefHeight="25.0" prefWidth="85.0" />
-                                                                                          <ComboBox fx:id="locStandLength" layoutX="192.0" layoutY="44.0" onAction="#onStandLength" prefHeight="25.0" prefWidth="67.0" />
-                                                                                          <ComboBox fx:id="locStandThs" layoutX="319.0" layoutY="44.0" onAction="#onStandThs" prefHeight="25.0" prefWidth="63.0" />
+                                                                                          <Label layoutX="15.0" layoutY="14.0" text="Консоли">
+                                                                                             <font>
+                                                                                                <Font name="System Bold Italic" size="12.0" />
+                                                                                             </font></Label>
+                                                                                          <ComboBox fx:id="locStandClass" layoutX="32.0" layoutY="44.0" onAction="#onStandClass" prefHeight="25.0" prefWidth="133.0" />
+                                                                                          <ComboBox fx:id="locStandLength" layoutX="192.0" layoutY="44.0" onAction="#onStandLength" prefHeight="25.0" prefWidth="101.0" />
+                                                                                          <ComboBox fx:id="locStandThs" layoutX="319.0" layoutY="44.0" onAction="#onStandThs" prefHeight="25.0" prefWidth="93.0" />
                                                                                           <ComboBox fx:id="locStandHeight" disable="true" layoutX="437.0" layoutY="44.0" onAction="#onStandHeight" prefHeight="25.0" prefWidth="60.0" visible="false" />
-                                                                                          <Label layoutX="21.0" layoutY="48.0" text="Класс" />
-                                                                                          <Label layoutX="155.0" layoutY="48.0" text="Длина" />
-                                                                                          <Label layoutX="268.0" layoutY="48.0" text="Толщина" />
+                                                                                          <Label layoutX="85.0" layoutY="22.0" text="Серия" />
+                                                                                          <Label layoutX="198.0" layoutY="22.0" text="Длина,мм" />
+                                                                                          <Label layoutX="316.0" layoutY="22.0" text="Толщина,мм" />
                                                                                           <Label disable="true" layoutX="391.0" layoutY="46.0" text="Высота" visible="false" />
                                                                                           <Label layoutX="489.0" layoutY="114.0" text="Количество" />
                                                                                           <TextField fx:id="locStandCounts" alignment="CENTER_RIGHT" layoutX="577.0" layoutY="110.0" prefHeight="25.0" prefWidth="92.0" text="1" />
-                                                                                          <Label layoutX="399.0" layoutY="46.0" text="Исполнение" />
-                                                                                          <ComboBox fx:id="locStandCon" layoutX="473.0" layoutY="44.0" onAction="#onStandConstruction" prefHeight="25.0" prefWidth="65.0" />
+                                                                                          <Label layoutX="463.0" layoutY="22.0" text="Исполнение" />
+                                                                                          <ComboBox fx:id="locStandCon" layoutX="455.0" layoutY="44.0" onAction="#onStandConstruction" prefHeight="25.0" prefWidth="83.0" />
                                                                                           <Button fx:id="locClearStandBtn" layoutX="557.0" layoutY="44.0" mnemonicParsing="false" onMouseClicked="#handleClearStand" prefHeight="25.0" prefWidth="116.0" text="Очистить фильтр" />
-                                                                                          <CheckBox fx:id="locSimpleCheck" layoutX="102.0" layoutY="6.0" mnemonicParsing="false" onAction="#handleSimpleLinkIn" text="Соответствие консолей и реек">
-                                                                                             <font>
-                                                                                                <Font name="System Bold" size="13.0" />
-                                                                                             </font>
-                                                                                          </CheckBox>
                                                                                        </children>
                                                                                     </Pane>
                                                                                     <Pane prefHeight="200.0" prefWidth="200.0">
                                                                                        <children>
-                                                                                          <ListView fx:id="locListProfil" layoutX="56.0" layoutY="80.0" onMouseClicked="#handleSelectProfil" prefHeight="97.0" prefWidth="420.0" />
+                                                                                          <ListView fx:id="locListProfil" layoutX="56.0" layoutY="76.0" onMouseClicked="#handleSelectProfil" prefHeight="110.0" prefWidth="420.0" />
                                                                                           <Button defaultButton="true" layoutX="524.0" layoutY="138.0" mnemonicParsing="false" onAction="#handleAddProfilInPr" prefHeight="25.0" prefWidth="125.0" text="Добавить в проект" />
-                                                                                          <Label layoutX="10.0" layoutY="14.0" text="Рейки и профиля" />
+                                                                                          <Label layoutX="10.0" layoutY="14.0" text="Рейки">
+                                                                                             <font>
+                                                                                                <Font name="System Bold Italic" size="12.0" />
+                                                                                             </font></Label>
                                                                                           <Separator layoutY="4.0" prefHeight="10.0" prefWidth="690.0" />
-                                                                                          <ComboBox fx:id="locProfilClass" layoutX="61.0" layoutY="48.0" onAction="#onProfilClass" prefHeight="25.0" prefWidth="77.0" />
-                                                                                          <ComboBox fx:id="locProfilLength" layoutX="190.0" layoutY="48.0" onAction="#onProfilLength" prefHeight="25.0" prefWidth="69.0" />
-                                                                                          <ComboBox fx:id="locProfilThs" layoutX="317.0" layoutY="48.0" onAction="#onProfilThs" prefHeight="25.0" prefWidth="60.0" />
+                                                                                          <ComboBox fx:id="locProfilClass" layoutX="39.0" layoutY="48.0" onAction="#onProfilClass" prefHeight="25.0" prefWidth="125.0" />
+                                                                                          <ComboBox fx:id="locProfilLength" layoutX="190.0" layoutY="48.0" onAction="#onProfilLength" prefHeight="25.0" prefWidth="101.0" />
+                                                                                          <ComboBox fx:id="locProfilThs" layoutX="317.0" layoutY="48.0" onAction="#onProfilThs" prefHeight="25.0" prefWidth="106.0" />
                                                                                           <ComboBox fx:id="locProfilHeight" disable="true" layoutX="440.0" layoutY="48.0" onAction="#onProfilHeight" prefHeight="25.0" prefWidth="65.0" visible="false" />
-                                                                                          <Label layoutX="21.0" layoutY="52.0" text="Класс" />
-                                                                                          <Label layoutX="154.0" layoutY="52.0" text="Длина" />
-                                                                                          <Label layoutX="266.0" layoutY="52.0" text="Толщина" />
+                                                                                          <Label layoutX="96.0" layoutY="23.0" text="Серия" />
+                                                                                          <Label layoutX="190.0" layoutY="23.0" text="Длина,мм" />
+                                                                                          <Label layoutX="322.0" layoutY="23.0" text="Толщина,мм" />
                                                                                           <Label disable="true" layoutX="389.0" layoutY="50.0" text="Высота" visible="false" />
                                                                                           <Label layoutX="497.0" layoutY="108.0" text="Количество" />
                                                                                           <TextField fx:id="locProfilCounts" alignment="CENTER_RIGHT" layoutX="572.0" layoutY="104.0" prefHeight="25.0" prefWidth="92.0" text="1" />
-                                                                                          <Label layoutX="398.0" layoutY="50.0" text="Исполнение" />
-                                                                                          <ComboBox fx:id="locProfilCon" layoutX="472.0" layoutY="48.0" onAction="#onProfilConstruction" prefHeight="25.0" prefWidth="72.0" />
+                                                                                          <Label layoutX="466.0" layoutY="23.0" text="Исполнение" />
+                                                                                          <ComboBox fx:id="locProfilCon" layoutX="457.0" layoutY="48.0" onAction="#onProfilConstruction" prefHeight="25.0" prefWidth="87.0" />
                                                                                           <Button fx:id="locClearProfilBtn" layoutX="560.0" layoutY="46.0" mnemonicParsing="false" onMouseClicked="#handleClearProfil" prefHeight="25.0" prefWidth="116.0" text="Очистить фильтр" />
                                                                                        </children>
                                                                                     </Pane>
                                                                                     <Pane prefHeight="175.0" prefWidth="686.0">
                                                                                        <children>
-                                                                                          <ListView fx:id="locListClaims" layoutX="64.0" layoutY="67.0" onContextMenuRequested="#handleSelectBracket" prefHeight="84.0" prefWidth="420.0" />
+                                                                                          <ListView fx:id="locListClaims" layoutX="64.0" layoutY="63.0" onContextMenuRequested="#handleSelectBracket" prefHeight="96.0" prefWidth="420.0" />
                                                                                           <Button defaultButton="true" layoutX="536.0" layoutY="110.0" mnemonicParsing="false" onAction="#handleAddClaimsInPr" prefHeight="25.0" prefWidth="120.0" text="Добавить в проект" />
-                                                                                          <Label layoutX="14.0" layoutY="14.0" text="Крепления" />
+                                                                                          <Label layoutX="14.0" layoutY="14.0" text="Крепления">
+                                                                                             <font>
+                                                                                                <Font name="System Bold Italic" size="12.0" />
+                                                                                             </font></Label>
                                                                                           <Separator layoutY="9.0" prefHeight="6.0" prefWidth="689.0" />
-                                                                                          <ComboBox fx:id="locClaimsClass" layoutX="61.0" layoutY="36.0" onAction="#onBracketClass" prefHeight="25.0" prefWidth="78.0" />
-                                                                                          <ComboBox fx:id="locClaimsLength" layoutX="187.0" layoutY="36.0" onAction="#onBracketLength" prefHeight="25.0" prefWidth="66.0" />
-                                                                                          <ComboBox fx:id="locClaimsThs" layoutX="313.0" layoutY="36.0" onAction="#onBracketThs" prefHeight="25.0" prefWidth="63.0" />
-                                                                                          <Label layoutX="24.0" layoutY="37.0" text="Класс" />
-                                                                                          <Label layoutX="148.0" layoutY="40.0" text="Длина" />
-                                                                                          <Label layoutX="260.0" layoutY="40.0" text="Толщина" />
+                                                                                          <ComboBox fx:id="locClaimsClass" layoutX="45.0" layoutY="36.0" onAction="#onBracketClass" prefHeight="25.0" prefWidth="126.0" />
+                                                                                          <ComboBox fx:id="locClaimsLength" layoutX="193.0" layoutY="36.0" onAction="#onBracketLength" prefHeight="25.0" prefWidth="101.0" />
+                                                                                          <ComboBox fx:id="locClaimsThs" layoutX="313.0" layoutY="36.0" onAction="#onBracketThs" prefHeight="25.0" prefWidth="100.0" />
+                                                                                          <Label layoutX="91.0" layoutY="14.0" text="Серия" />
+                                                                                          <Label layoutX="203.0" layoutY="14.0" text="Длина, мм" />
+                                                                                          <Label layoutX="320.0" layoutY="14.0" text="Толщина,мм" />
                                                                                           <Label layoutX="497.0" layoutY="76.0" text="Количество" />
                                                                                           <TextField fx:id="locClaimsCounts" alignment="CENTER_RIGHT" layoutX="572.0" layoutY="72.0" prefHeight="25.0" prefWidth="86.0" text="1" />
-                                                                                          <Label layoutX="392.0" layoutY="38.0" text="Исполнение" />
-                                                                                          <ComboBox fx:id="locClaimsCon" layoutX="466.0" layoutY="34.0" onAction="#onBracketConstruction" prefHeight="25.0" prefWidth="64.0" />
+                                                                                          <Label layoutX="458.0" layoutY="14.0" text="Исполнение" />
+                                                                                          <ComboBox fx:id="locClaimsCon" layoutX="449.0" layoutY="34.0" onAction="#onBracketConstruction" prefHeight="25.0" prefWidth="92.0" />
                                                                                           <Button fx:id="locClearBracketBtn" layoutX="556.0" layoutY="33.0" mnemonicParsing="false" onMouseClicked="#handleClearBracket" prefHeight="25.0" prefWidth="116.0" text="Очистить фильтр" />
                                                                                        </children>
                                                                                     </Pane>
