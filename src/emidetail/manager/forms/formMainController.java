@@ -1587,7 +1587,7 @@ public class formMainController implements Initializable, Observer {
     }
     
     private void clearCablingView() {
-        for( int k=0; k<50; k++) {
+        for( int k=0; k<65; k++) {
             Node rec = locCablePane.lookup("#rectangle");
             Node cir = locCablePane.lookup("#circle");
             if (rec!=null) {

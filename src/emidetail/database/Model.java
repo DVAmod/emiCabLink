@@ -310,12 +310,12 @@ public class Model extends Observable{
         List<String> sourcelist = (new ArrayList<String>());
         
         sourcelist.add("");
-        sourcelist.add("Исполнение 1");
-        sourcelist.add("Исполнение 2");
-        sourcelist.add("Исполнение 3");
-        sourcelist.add("Исполнение 4");
-        sourcelist.add("Исполнение 5");
-        sourcelist.add("Исполнение 6");
+        sourcelist.add(" 1  (S)");
+        sourcelist.add(" 2  (Z)");
+        sourcelist.add(" 3  (G)");
+        sourcelist.add(" 4  (X)");
+        sourcelist.add(" 5  (L)");
+        sourcelist.add(" 6  (R)");
         
         source_list = FXCollections.observableArrayList(sourcelist);
         
