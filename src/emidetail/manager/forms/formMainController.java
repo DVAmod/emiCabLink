@@ -47,10 +47,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Locale;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
@@ -1746,6 +1748,14 @@ public class formMainController implements Initializable, Observer {
         change_cab = 4;
     }
 
+    @FXML
+    private void handleSeriesSelect(ActionEvent event) {
+    }
+
+    @FXML
+    private void handleObrazSelect(ActionEvent event) {
+    }
+
 
 
     private static class DividerConverter extends StringConverter<Division> {
@@ -2181,7 +2191,10 @@ public class formMainController implements Initializable, Observer {
         String temp = "";
         Report rep = null;
         float mass_dec = 0;
-        DecimalFormat df = new DecimalFormat("#.###");
+        
+        DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(Locale.getDefault());
+        otherSymbols.setDecimalSeparator('.');
+        DecimalFormat df = new DecimalFormat("##0.00", otherSymbols);
 
         if (state == 1 ) {
             rep = new Report();
@@ -2199,7 +2212,9 @@ public class formMainController implements Initializable, Observer {
             mass_tr = mass_tr.replace(",", ".");
             rep.setMass(Float.valueOf(mass_tr));
             rep.setIndex(Model.getInstance().TRAY_INDEX);
-            mass_dec = Float.valueOf(df.format(rep.getMass()));
+            String format_mass = df.format((double)rep.getMass());
+            System.out.println("*******Format "+format_mass);
+            mass_dec = Float.valueOf(format_mass);
             rep.setMass(mass_dec);
             Model.getInstance().addReport( rep);
         }

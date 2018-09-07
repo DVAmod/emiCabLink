@@ -384,6 +384,12 @@ public class Model extends Observable{
         //addtrays_list = FXCollections.observableArrayList(additions);
         addTlist = FXCollections.observableArrayList(additions);
         addFlist = FXCollections.observableArrayList(additions);
+        
+            List<String> typeslist = Arrays.asList("","СНК","SM","НК","BS");
+            type_all_list = FXCollections.observableArrayList(typeslist);
+            
+            List<String> obrazlist = Arrays.asList("","S-образный","П-образный","I-образный","Z-образный","L-образный");
+            type_obraz_list = FXCollections.observableArrayList(obrazlist);
 
         /*
         List<String> addtraylist = new ArrayList<String>();
@@ -594,11 +600,7 @@ public class Model extends Observable{
             List<String> typebrackets = Arrays.asList("","SMA","SM","СНК","BSU","BSI");
             type_bracket_list = FXCollections.observableArrayList(typebrackets);
             
-            List<String> typeslist = Arrays.asList("","СНК","SM","НК","BS");
-            type_all_list = FXCollections.observableArrayList(typeslist);
             
-            List<String> obrazlist = Arrays.asList("","S-образный","П-образный","I-образный","Z-образный","L-образный");
-            type_obraz_list = FXCollections.observableArrayList(obrazlist);
             
             
             List<String> thsbracket = Arrays.asList("","2,0", "2,5", "3,0","4,0","5,0","8,0");

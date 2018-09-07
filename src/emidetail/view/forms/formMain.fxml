@@ -58,11 +58,11 @@
                                                 <Pane fx:id="filtredTrayPane" prefHeight="92.0" prefWidth="1230.0" AnchorPane.bottomAnchor="578.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="1.0">
                                                    <children>
                                                       <ComboBox fx:id="locTrayType" layoutX="91.0" layoutY="15.0" onAction="#handleTypeAction" prefWidth="150.0" />
-                                                      <ComboBox fx:id="locTraySource" layoutX="91.0" layoutY="55.0" onAction="#handleSourceAction" prefWidth="150.0" />
-                                                      <ComboBox fx:id="locHeight" editable="true" layoutX="327.0" layoutY="14.0" onAction="#handleHeightAction" prefHeight="25.0" prefWidth="96.0" />
-                                                      <ComboBox fx:id="locWidth" editable="true" layoutX="327.0" layoutY="55.0" onAction="#handleWidthAction" prefHeight="25.0" prefWidth="96.0" />
-                                                      <TextField fx:id="locArtEdit" layoutX="516.0" layoutY="16.0" onKeyReleased="#handleTArtReleased" prefHeight="25.0" prefWidth="115.0" />
-                                                      <Label fx:id="locArtLabel" layoutX="453.0" layoutY="19.0" text="Артикул:" textFill="#9a2222">
+                                                      <ComboBox fx:id="locTraySource" layoutX="91.0" layoutY="55.0" onAction="#handleSourceAction" prefHeight="25.0" prefWidth="149.0" />
+                                                      <ComboBox fx:id="locHeight" editable="true" layoutX="341.0" layoutY="14.0" onAction="#handleHeightAction" prefHeight="25.0" prefWidth="82.0" />
+                                                      <ComboBox fx:id="locWidth" editable="true" layoutX="341.0" layoutY="55.0" onAction="#handleWidthAction" prefHeight="25.0" prefWidth="82.0" />
+                                                      <TextField fx:id="locArtEdit" layoutX="528.0" layoutY="15.0" onKeyReleased="#handleTArtReleased" prefHeight="25.0" prefWidth="115.0" />
+                                                      <Label fx:id="locArtLabel" layoutX="468.0" layoutY="19.0" text="Артикул:" textFill="#9a2222">
                                                          <font>
                                                             <Font size="13.0" />
                                                          </font>
@@ -77,22 +77,22 @@
                                                             <Font size="13.0" />
                                                          </font>
                                                       </Label>
-                                                      <Label layoutX="254.0" layoutY="17.0" text="Высота,мм:">
+                                                      <Label layoutX="258.0" layoutY="17.0" text="Высота, мм:">
                                                          <font>
                                                             <Font size="13.0" />
                                                          </font>
                                                       </Label>
-                                                      <Label layoutX="251.0" layoutY="58.0" text="Ширина,мм:" translateX="1.0">
+                                                      <Label layoutX="252.0" layoutY="58.0" text="Ширина, мм:" translateX="1.0">
                                                          <font>
                                                             <Font size="13.0" />
                                                          </font>
                                                       </Label>
-                                                      <Label fx:id="locLengthLabel" layoutX="432.0" layoutY="57.0" text="Длина секции,мм:" textFill="#0a0a0a">
+                                                      <Label fx:id="locLengthLabel" layoutX="442.0" layoutY="57.0" text="Длина секции, мм:" textFill="#0a0a0a">
                                                          <font>
                                                             <Font size="13.0" />
                                                          </font>
                                                       </Label>
-                                                      <ComboBox fx:id="locLength" editable="true" layoutX="542.0" layoutY="55.0" onAction="#handleLengthAction" prefHeight="25.0" prefWidth="90.0">
+                                                      <ComboBox fx:id="locLength" editable="true" layoutX="555.0" layoutY="55.0" onAction="#handleLengthAction" prefHeight="25.0" prefWidth="90.0">
                                                          <effect>
                                                             <ColorAdjust hue="0.24" />
                                                          </effect>
@@ -404,8 +404,8 @@
                                                             <Font size="13.0" />
                                                          </font>
                                                       </CheckBox>
-                                                      <ComboBox fx:id="locComboClass" layoutX="671.0" layoutY="44.0" prefHeight="25.0" prefWidth="180.0" />
-                                                      <ComboBox fx:id="locComboStyles" layoutX="887.0" layoutY="44.0" prefHeight="25.0" prefWidth="180.0" />
+                                                      <ComboBox fx:id="locComboClass" layoutX="671.0" layoutY="44.0" onAction="#handleSeriesSelect" prefHeight="25.0" prefWidth="180.0" />
+                                                      <ComboBox fx:id="locComboStyles" layoutX="887.0" layoutY="44.0" onAction="#handleObrazSelect" prefHeight="25.0" prefWidth="180.0" />
                                                       <Label layoutX="671.0" layoutY="26.0" text="По серии конструкции:" />
                                                       <Label layoutX="887.0" layoutY="26.0" text="По типу профиля:" />
                                                       <CheckBox fx:id="locSimpleCheck" layoutX="62.0" layoutY="48.0" mnemonicParsing="false" onAction="#handleSimpleLinkIn" text="Соответствие консолей и реек">
@@ -592,7 +592,7 @@
                                                                                           <Cursor fx:constant="OPEN_HAND" />
                                                                                        </cursor>
                                                                                     </Pagination>
-                                                                                    <Label alignment="TOP_CENTER" layoutX="147.0" layoutY="463.0" prefHeight="17.0" prefWidth="223.0" style="-fx-background-color: #999999;" text="Консоль : Профиль : Крепление" textFill="#1f6479">
+                                                                                    <Label alignment="TOP_CENTER" layoutX="147.0" layoutY="463.0" prefHeight="17.0" prefWidth="223.0" style="-fx-background-color: #BBBBBB;" text="Консоль : Профиль : Крепление" textFill="#1f6479">
                                                                                        <font>
                                                                                           <Font name="System Bold" size="12.0" />
                                                                                        </font>
@@ -661,18 +661,18 @@
                                                       <content>
                                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                                                <children>
-                                                                  <Pane fx:id="filtredAcsPane" prefHeight="127.0" prefWidth="1230.0">
+                                                                  <Pane fx:id="filtredAcsPane" prefHeight="104.0" prefWidth="1230.0">
                                                                      <children>
                                                                         <ComboBox fx:id="locAcsType" layoutX="109.0" layoutY="54.0" onAction="#handleAcsTypeAction" prefHeight="25.0" prefWidth="133.0" />
-                                                                        <ComboBox fx:id="locAcsSource" layoutX="109.0" layoutY="93.0" onAction="#handleAcsSourceAction" prefHeight="25.0" prefWidth="133.0" />
-                                                                        <ComboBox fx:id="locAcsHeight" editable="true" layoutX="504.0" layoutY="15.0" onAction="#handleAcsHeightAction" prefHeight="25.0" prefWidth="97.0" />
+                                                                        <ComboBox fx:id="locAcsSource" layoutX="526.0" layoutY="54.0" onAction="#handleAcsSourceAction" prefHeight="25.0" prefWidth="90.0" />
+                                                                        <ComboBox fx:id="locAcsHeight" editable="true" layoutX="523.0" layoutY="15.0" onAction="#handleAcsHeightAction" prefHeight="25.0" prefWidth="97.0" />
                                                                         <ComboBox fx:id="locAcsWidth" editable="true" layoutX="328.0" layoutY="15.0" onAction="#handleAcsWidthAction" prefHeight="25.0" prefWidth="97.0" />
                                                                         <Label layoutX="5.0" layoutY="56.0" text="Тип аксессуара:">
                                                                            <font>
                                                                               <Font size="13.0" />
                                                                            </font>
                                                                         </Label>
-                                                                        <Label layoutX="16.0" layoutY="96.0" text="Исполнение:" translateX="5.0">
+                                                                        <Label layoutX="433.0" layoutY="57.0" text="Исполнение:" translateX="5.0">
                                                                            <font>
                                                                               <Font size="13.0" />
                                                                            </font>
@@ -692,8 +692,8 @@
                                                                         <Separator layoutX="248.0" orientation="VERTICAL" prefHeight="103.0" prefWidth="6.0" />
                                                                         <Separator layoutX="871.0" layoutY="-4.0" orientation="VERTICAL" prefHeight="98.0" prefWidth="5.0" />
                                                                         <Button layoutX="705.0" layoutY="54.0" mnemonicParsing="false" onAction="#handleAcsFilterClear" text="Сбросить фильтры" />
-                                                                        <TextField fx:id="locArtAcs" layoutX="504.0" layoutY="54.0" onKeyReleased="#handleArtAcsReleased" prefHeight="25.0" prefWidth="115.0" />
-                                                                        <Label fx:id="locArtLabel1" layoutX="441.0" layoutY="57.0" text="Артикул:" textFill="#9a2222">
+                                                                        <TextField fx:id="locArtAcs" layoutX="1165.0" layoutY="-24.0" onKeyReleased="#handleArtAcsReleased" prefHeight="25.0" prefWidth="115.0" />
+                                                                        <Label fx:id="locArtLabel1" layoutX="1102.0" layoutY="-21.0" text="Артикул:" textFill="#9a2222">
                                                                            <font>
                                                                               <Font size="13.0" />
                                                                            </font>
@@ -725,7 +725,7 @@
                                                                            <children>
                                                                               <Pane prefHeight="330.0" prefWidth="610.0">
                                                                                  <children>
-                                                                                    <TableView fx:id="locAcsTable" layoutX="1.0" layoutY="30.0" prefHeight="247.0" prefWidth="611.0">
+                                                                                    <TableView fx:id="locAcsTable" layoutX="1.0" layoutY="-4.0" prefHeight="281.0" prefWidth="611.0">
                                                                                       <columns>
                                                                                         <TableColumn fx:id="colAcsDesc" prefWidth="339.99999392032623" text="Описание" />
                                                                                         <TableColumn fx:id="colAcsArticul" minWidth="0.0" prefWidth="166.0" text="Артикул" />
@@ -759,7 +759,7 @@
                                                             </AnchorPane>
                                                       </content>
                                                     </TitledPane>
-                                                    <TitledPane animated="false" text="Все виды аксессуаров">
+                                                    <TitledPane animated="false" text="Аксессуары дополнительно">
                                                       <content>
                                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                                                       </content>
@@ -767,6 +767,74 @@
                                                   </panes>
                                                 </Accordion>
                                              </children></AnchorPane>
+                                      </content>
+                                    </Tab>
+                                    <Tab text="Каталог">
+                                      <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                             <children>
+                                                <Pane prefHeight="102.0" prefWidth="1280.0">
+                                                   <children>
+                                                      <Button layoutX="7.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleCatalog1" prefHeight="80.0" prefWidth="160.0" text="Каталог прокатных линейных лотков" wrapText="true">
+                                                         <font>
+                                                            <Font size="13.0" />
+                                                         </font>
+                                                      </Button>
+                                                      <Button layoutX="174.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleCatalog2" prefHeight="80.0" prefWidth="160.0" text="Каталог лестничных лотков и кабельроста" wrapText="true">
+                                                         <font>
+                                                            <Font size="13.0" />
+                                                         </font>
+                                                      </Button>
+                                                      <Button layoutX="340.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleCatalog3" prefHeight="80.0" prefWidth="160.0" text="Каталог несущих конструкций" wrapText="true">
+                                                         <font>
+                                                            <Font size="13.0" />
+                                                         </font>
+                                                      </Button>
+                                                      <Button layoutX="507.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleCatalog4" prefHeight="80.0" prefWidth="160.0" text="Каталог Метизов и вспомогательных деталей" wrapText="true">
+                                                         <font>
+                                                            <Font size="13.0" />
+                                                         </font>
+                                                      </Button>
+                                                   </children>
+                                                </Pane>
+                                                <BorderPane layoutX="32.0" layoutY="101.0" prefHeight="570.0" prefWidth="1240.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="101.0">
+                                                   <bottom>
+                                                      <Pane prefHeight="113.0" prefWidth="1240.0" BorderPane.alignment="CENTER" />
+                                                   </bottom>
+                                                   <top>
+                                                      <HBox prefHeight="459.0" prefWidth="1236.0" BorderPane.alignment="CENTER">
+                                                         <children>
+                                                            <ListView fx:id="locCatalogClass" prefHeight="459.0" prefWidth="253.0" />
+                                                            <Separator orientation="VERTICAL" prefHeight="200.0" />
+                                                            <TableView fx:id="locCatalogView" prefHeight="459.0" prefWidth="561.0">
+                                                              <columns>
+                                                                <TableColumn prefWidth="219.0" text="C1" />
+                                                                <TableColumn prefWidth="121.0" text="C2" />
+                                                              </columns>
+                                                            </TableView>
+                                                            <Pane prefHeight="459.0" prefWidth="138.0">
+                                                               <children>
+                                                                  <Button defaultButton="true" layoutX="32.0" layoutY="27.0" mnemonicParsing="false" onAction="#handleAddCatalog" text="--&gt;" />
+                                                                  <Button defaultButton="true" layoutX="32.0" layoutY="116.0" mnemonicParsing="false" onAction="#handleDelCatalog" text="&lt;--" />
+                                                                  <Button layoutX="14.0" layoutY="219.0" mnemonicParsing="false" onAction="#handleCleanCatalog" prefHeight="43.0" prefWidth="69.0" text="Очистить список" wrapText="true" />
+                                                                  <Button defaultButton="true" layoutX="3.0" layoutY="280.0" mnemonicParsing="false" onAction="#handleConfirmCatalog" prefHeight="54.0" prefWidth="92.0" text="Добавить  выбранные к проекту" wrapText="true" />
+                                                                  <Button layoutX="21.0" layoutY="72.0" mnemonicParsing="false" onAction="#handleAddTenCatalog" text="10x --&gt;" />
+                                                                  <Button layoutX="21.0" layoutY="160.0" mnemonicParsing="false" onAction="#handleDelTenCatalog" text="&lt;-- 10x" />
+                                                               </children>
+                                                            </Pane>
+                                                            <TableView fx:id="locCatalogSelect" prefHeight="459.0" prefWidth="435.0">
+                                                              <columns>
+                                                                <TableColumn prefWidth="308.0" text="C1" />
+                                                                <TableColumn minWidth="0.0" prefWidth="71.0" text="C2" />
+                                                              </columns>
+                                                            </TableView>
+                                                            <Separator orientation="VERTICAL" prefHeight="200.0" />
+                                                         </children>
+                                                      </HBox>
+                                                   </top>
+                                                </BorderPane>
+                                             </children>
+                                          </AnchorPane>
                                       </content>
                                     </Tab>
                                 </tabs>
@@ -794,6 +862,7 @@
                                           <Font size="13.0" />
                                        </font>
                                     </Button>
+                                    <Separator layoutX="-3.0" layoutY="238.0" orientation="VERTICAL" prefHeight="200.0" />
                                  </children>
                               </Pane>
                               <Pane layoutX="32.0" prefHeight="700.0" prefWidth="11.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
