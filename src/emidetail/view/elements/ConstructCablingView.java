@@ -59,15 +59,15 @@ public class ConstructCablingView {
         
             start();
         
-        boolean calcres = cabcalc.calc(new Gabarit(input_diam, count_cab, type), index+7);
+        boolean calc_res = cabcalc.calc(new Gabarit(input_diam, count_cab, type), index+7);
         
-        if (calcres) {
+        if (calc_res) {
             
             float th = cabcalc.trayHeight;
             float tw = cabcalc.trayWidth;
             
             
-            System.out.println("res ="+calcres+"  th="+th+"   tw="+tw);
+            System.out.println("res ="+calc_res+"  th="+th+"   tw="+tw);
 
             float ph = 200f;
             float pw = 400f;
@@ -87,7 +87,7 @@ public class ConstructCablingView {
             }
 
                 Rectangle rect1 = new Rectangle(startX, startY-2, endW, endH);
-                rect1.setFill(Color.CADETBLUE);
+                rect1.setFill(Color.WHITESMOKE);
                 rect1.setId("rectangle");
 
                 //Transparent rectangle with Stroke
@@ -96,8 +96,27 @@ public class ConstructCablingView {
                 rect2.setStroke(Color.BLACK);
                 rect2.setStrokeWidth(4);
                 rect2.setId("rectangle");
+                
+                double endTrayW = cabcalc.width;
+                double endTrayH = cabcalc.height;
+                
+                if (kof_index==1) {
+                    endTrayW =  (endTrayW*kof1);
+                    endTrayH =  (endTrayH*kof1);
+                }
+                if (kof_index==2) {
+                    endTrayW =  (endTrayW*kof2);
+                    endTrayH =  (endTrayH*kof2);
+                }
+                
+                Rectangle rect4 = new Rectangle(startX, (startY+endH-endTrayH/1.32), endTrayW/1.08, endTrayH/1.32);
+                    rect4.setFill(Color.GREY);
+                    rect4.setStroke(Color.BLACK);
+                    rect4.setOpacity(.3);
+                    rect4.setStrokeWidth(3);
+                    rect4.setId("rectangle");
 
-                canvas.getChildren().addAll(rect2,rect1);
+                canvas.getChildren().addAll(rect2,rect1,rect4);
             
             for (int k = 0; k < cabcalc.getDataIndex(); k++) {
                 
@@ -110,32 +129,35 @@ public class ConstructCablingView {
                 }
                 if (k!=0) {
                     if (type==1 || type==2) {
-                        startX = (int) (startX + Math.round((cabcalc.getDiametr(k-1))/2));
+                        startX = (int) (startX + 0.2 * Math.round((cabcalc.getDiametr(k-1))/2));
                         if (type==2) {
-                            startX = (int) (startX +  2*Math.round((cabcalc.getDiametr(k-1))/2));
+                            startX = (int) (startX +  1.7 * Math.round((cabcalc.getDiametr(k-1))/2));
                         }
                     }
-                    if (type==3) {
-                        startY = startY + 2*Math.round((cabcalc.getDiametr(k-1))/2);
-                        startX = (int) (startX - 2);
+                    if (type==3 ) {
+                        //startY = startY + 2*Math.round((cabcalc.getDiametr(k-1))/2);
+                        startX = (int) (startX - 1.9 * Math.round((cabcalc.getDiametr(k-1))));
                     }
+                    if (type==4 ) {
+                        startX = startX + 2;
+                    }
+                    
                 }
                 
                 type = cabcalc.getType(k);
+                if (k==1){
+                    startX = startX - 2; 
+                }
                 
                 if (k==0){
+                    startOldX = new Integer( startX);
                     startX = (int) (startX + 2 + rad);    
                     startY = (int) (startY + (float)endH - 2.5f - rad);
-                    startOldX = startX;
-                    startOldY = startY;
+                    
+                    
                 } else {
                     
-                    if (type==4) {
-                        startY = (int)(startOldY - 2.5f );
-                    } else {
-                        if (type==1 || type==2)
-                        startY = (int)(startOldY - 2f);
-                    }
+                    startY = (int) (startOldY + (float)endH - 2.5f - rad);
                     if (kof_index==1) {
                         startX = (int) (startX +   rad + (cabcalc.getWidth(k-1)*kof1));
                     }
@@ -146,7 +168,10 @@ public class ConstructCablingView {
                         startX = (int) (startX + 2);
                     }
                     if (type==4) {
-                        startX = (int) (startX + 0.3* rad );
+                        startX = (int) (startX - 0.3* rad );
+                    }
+                    if (type==3) {
+                        startX = (int) (startX - 0.5* rad );
                     }
                 }
                 
@@ -160,7 +185,7 @@ public class ConstructCablingView {
                         count_cab = count_cab*2;
                     }
                     Rectangle rect3 = new Rectangle(startX-rad-1, startY-rad+1, rad*count_cab*2+3, 2*rad+3);
-                    rect3.setFill(Color.BLUE);
+                    rect3.setFill(Color.TRANSPARENT);
                     //rect3.setOpacity(.7);
                     rect3.setId("rectangle");
                     canvas.getChildren().add(rect3);
@@ -175,10 +200,10 @@ public class ConstructCablingView {
                             ci3 = new Circle(startX+ rad*i*2, startY, rad);
                         }
                         if (ci3!=null) {
-                            ci3.setFill(Color.GREEN);
+                            ci3.setFill(Color.CADETBLUE);
                             ci3.setStroke(Color.BLACK);
                             ci3.setStrokeWidth(2);
-                            ci3.setOpacity(.6);
+                            //ci3.setOpacity(.6);
                             ci3.setId("circle");
                             canvas.getChildren().add(ci3);
                         }
@@ -205,17 +230,17 @@ public class ConstructCablingView {
                         //rect3 = new Rectangle(startX-rad-1, startY-(2*rad*level+1.15*rad)+2, 2*rad*count_c+0.5*rad+2, 2*rad*level+2*rad-2);
                         //int count_c2 = (int)Math.floor(count_cab/2);
                         Ellipse ca = new Ellipse(startX+rad*count_c-0.8*rad, startY-(rad*level)+2,rad*count_c+0.4*rad ,rad*level+0.5*rad);
-                        ca.setFill(Color.BLUE);
+                        ca.setFill(Color.TRANSPARENT);
                         ca.setStroke(Color.BLACK);
-                        ca.setStrokeWidth(3);
-                        ca.setOpacity(0.6);
+                        ca.setStrokeWidth(2);
+                        //ca.setOpacity(0.6);
                         ca.setId("circle");
                         canvas.getChildren().add(ca);
                         //System.out.println("c="+count_cab+"  cr="+Math.ceil((double)count_cab/2));
                     }
                     if (rect3!=null && type==3) {    
-                        rect3.setFill(Color.BLUE);
-                        rect3.setOpacity(.5);
+                        rect3.setFill(Color.TRANSPARENT);
+                        //rect3.setOpacity(.5);
                         rect3.setId("rectangle");
                         canvas.getChildren().add(rect3);
                     }
@@ -249,16 +274,18 @@ public class ConstructCablingView {
                                 ci3 = new Circle(startX+ rad*i*2, startY+1, rad);
                             }
                             if (ci3!=null) {
-                                ci3.setFill(Color.GREEN);
+                                ci3.setFill(Color.CADETBLUE);
                                 ci3.setStroke(Color.BLACK);
                                 ci3.setStrokeWidth(2);
-                                ci3.setOpacity(.4);
+                                //ci3.setOpacity(.4);
                                 ci3.setId("circle");
                                 canvas.getChildren().add(ci3);
                             }
                         }
                     }
                 }
+                
+                
          
             }
         }
@@ -298,7 +325,7 @@ public class ConstructCablingView {
             }
 
                 Rectangle rect1 = new Rectangle(startX, startY-2, endW, endH);
-                rect1.setFill(Color.CADETBLUE);
+                rect1.setFill(Color.WHITESMOKE);
                 rect1.setId("rectangle");
 
                 //Transparent rectangle with Stroke
@@ -321,7 +348,7 @@ public class ConstructCablingView {
                     count_cab = count_cab*2;
                 }
                 Rectangle rect3 = new Rectangle(startX-rad-1, startY-rad+1, rad*count_cab*2+3, 2*rad+3);
-                rect3.setFill(Color.BLUE);
+                rect3.setFill(Color.TRANSPARENT);
                 //rect3.setOpacity(.7);
                 rect3.setId("rectangle");
                 canvas.getChildren().add(rect3);
@@ -336,10 +363,10 @@ public class ConstructCablingView {
                         ci3 = new Circle(startX+ rad*i*2, startY, rad);
                     }
                     if (ci3!=null) {
-                        ci3.setFill(Color.GREEN);
+                        ci3.setFill(Color.CADETBLUE);
                         ci3.setStroke(Color.BLACK);
                         ci3.setStrokeWidth(2);
-                        ci3.setOpacity(.6);
+                        //ci3.setOpacity(.6);
                         ci3.setId("circle");
                         canvas.getChildren().add(ci3);
                     }
@@ -366,17 +393,17 @@ public class ConstructCablingView {
                     //rect3 = new Rectangle(startX-rad-1, startY-(2*rad*level+1.15*rad)+2, 2*rad*count_c+0.5*rad+2, 2*rad*level+2*rad-2);
                     //int count_c2 = (int)Math.floor(count_cab/2);
                     Ellipse ca = new Ellipse(startX+rad*count_c-0.8*rad, startY-(rad*level)+2,rad*count_c+0.4*rad ,rad*level+0.5*rad);
-                    ca.setFill(Color.BLUE);
+                    ca.setFill(Color.TRANSPARENT);
                     ca.setStroke(Color.BLACK);
                     ca.setStrokeWidth(3);
-                    ca.setOpacity(0.6);
+                    //ca.setOpacity(0.6);
                     ca.setId("circle");
                     canvas.getChildren().add(ca);
                     //System.out.println("c="+count_cab+"  cr="+Math.ceil((double)count_cab/2));
                 }
                 if (rect3!=null && type==3) {    
-                    rect3.setFill(Color.BLUE);
-                    rect3.setOpacity(.5);
+                    rect3.setFill(Color.TRANSPARENT);
+                    //rect3.setOpacity(.5);
                     rect3.setId("rectangle");
                     canvas.getChildren().add(rect3);
                 }
@@ -410,10 +437,10 @@ public class ConstructCablingView {
                             ci3 = new Circle(startX+ rad*i*2, startY+1, rad);
                         }
                         if (ci3!=null) {
-                            ci3.setFill(Color.GREEN);
+                            ci3.setFill(Color.CADETBLUE);
                             ci3.setStroke(Color.BLACK);
                             ci3.setStrokeWidth(2);
-                            ci3.setOpacity(.4);
+                            //ci3.setOpacity(.4);
                             ci3.setId("circle");
                             canvas.getChildren().add(ci3);
                         }

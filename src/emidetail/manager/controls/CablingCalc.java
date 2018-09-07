@@ -142,26 +142,32 @@ public class CablingCalc {
                 float ht = res1.getH();
                 //width = wt/1.4f;
                 //height = ht*1.4f;
-                widths.add(wt/1.4f);
-                heights.add(ht*1.4f);
+                widths.add(wt/1.1f);
+                heights.add(ht*1.1f);
                  
  
             }
             
             float max_height = 0;
+            int count_type4 = 0;
             
             for (int ii = 0; ii< widths.size(); ii++ ) {
                 width += widths.get(ii);
                 Integer type2 = types.get(ii);
                 if (type2==4) {
-                    max_height = (heights.get(ii))/1.4f;
+                    if ((heights.get(ii))/1.2f > max_height)
+                        max_height = (heights.get(ii))/1.2f;
+                    
+                    count_type4++;
                 }
                 height += heights.get(ii);
             }
             
             height = height/(widths.size()-1);
             if (height < max_height) height = max_height;
-            
+            if (count_type4 > 1) {
+                height = max_height;
+            }
             
             dataclear = false;
         }

@@ -516,6 +516,12 @@ public class formMainController implements Initializable, Observer {
     private Pane locCablePane;
     @FXML
     private TextField locCableQuid;
+    @FXML
+    private ListView<?> locCatalogClass;
+    @FXML
+    private TableView<?> locCatalogView;
+    @FXML
+    private TableView<?> locCatalogSelect;
     
     
     public void initUnit(){
@@ -1754,6 +1760,46 @@ public class formMainController implements Initializable, Observer {
 
     @FXML
     private void handleObrazSelect(ActionEvent event) {
+    }
+
+    @FXML
+    private void handleCatalog1(ActionEvent event) {
+    }
+
+    @FXML
+    private void handleCatalog2(ActionEvent event) {
+    }
+
+    @FXML
+    private void handleCatalog3(ActionEvent event) {
+    }
+
+    @FXML
+    private void handleCatalog4(ActionEvent event) {
+    }
+
+    @FXML
+    private void handleAddCatalog(ActionEvent event) {
+    }
+
+    @FXML
+    private void handleDelCatalog(ActionEvent event) {
+    }
+
+    @FXML
+    private void handleCleanCatalog(ActionEvent event) {
+    }
+
+    @FXML
+    private void handleConfirmCatalog(ActionEvent event) {
+    }
+
+    @FXML
+    private void handleAddTenCatalog(ActionEvent event) {
+    }
+
+    @FXML
+    private void handleDelTenCatalog(ActionEvent event) {
     }
 
 
