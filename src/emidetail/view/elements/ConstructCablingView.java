@@ -94,7 +94,7 @@ public class ConstructCablingView {
                 Rectangle rect2 = new Rectangle(startX, startY, endW, endH);
                 rect2.setFill(Color.TRANSPARENT);
                 rect2.setStroke(Color.BLACK);
-                rect2.setStrokeWidth(4);
+                rect2.setStrokeWidth(5);
                 rect2.setId("rectangle");
                 
                 double endTrayW = cabcalc.width;
@@ -116,7 +116,7 @@ public class ConstructCablingView {
                     rect4.setStrokeWidth(3);
                     rect4.setId("rectangle");
 
-                canvas.getChildren().addAll(rect2,rect1,rect4);
+                canvas.getChildren().addAll(rect2,rect1);
             
             for (int k = 0; k < cabcalc.getDataIndex(); k++) {
                 
@@ -136,7 +136,11 @@ public class ConstructCablingView {
                     }
                     if (type==3 ) {
                         //startY = startY + 2*Math.round((cabcalc.getDiametr(k-1))/2);
-                        startX = (int) (startX - 1.9 * Math.round((cabcalc.getDiametr(k-1))));
+                        if (k==1) {
+                            startX = (int) (startX - 0.8 * Math.round((cabcalc.getDiametr(k-1))));
+                        } else {
+                            startX = (int) (startX - 1.9 * Math.round((cabcalc.getDiametr(k-1))));
+                        }
                     }
                     if (type==4 ) {
                         startX = startX + 2;
@@ -218,7 +222,7 @@ public class ConstructCablingView {
                     if (type==4) {
                         startY = startY+6;
                         startX = startX-2;
-                        rad = rad*0.87;
+                        rad = rad*0.92;
                     } else {
                         rad = rad*0.95;
                     }
@@ -381,7 +385,7 @@ public class ConstructCablingView {
                 if (type==4) {
                     startY = startY+6;
                     startX = startX-2;
-                    rad = rad*0.87;
+                    rad = rad*0.92;
                 } else {
                     rad = rad*0.95;
                 }

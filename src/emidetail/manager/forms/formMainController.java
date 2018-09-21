@@ -522,6 +522,8 @@ public class formMainController implements Initializable, Observer {
     private TableView<?> locCatalogView;
     @FXML
     private TableView<?> locCatalogSelect;
+    @FXML
+    private Label locLabelProjectName;
     
     
     public void initUnit(){
@@ -1652,7 +1654,7 @@ public class formMainController implements Initializable, Observer {
         ConstructCablingView.showResult(change_cab);
         
         locCableRate.setText(cabCalc.trayWidth + " x "+cabCalc.trayHeight);
-        Float freeDgr = ((cabCalc.width*cabCalc.height))/(cabCalc.trayWidth*cabCalc.trayHeight);
+        Float freeDgr = ((cabCalc.swidth*cabCalc.sheight))/(cabCalc.trayWidth*cabCalc.trayHeight)*100;
         locCableQuid.setText(freeDgr.toString());
         
     }
@@ -1729,7 +1731,7 @@ public class formMainController implements Initializable, Observer {
             ConstructCablingView.showAllResult(1);
             
             locCableRate.setText(cabCalc.trayWidth + " x "+cabCalc.trayHeight);
-            Float freeDgr = ((cabCalc.width*cabCalc.height)/1.2f)/(cabCalc.trayWidth*cabCalc.trayHeight);
+            Float freeDgr = ((cabCalc.swidth*cabCalc.sheight))/(cabCalc.trayWidth*cabCalc.trayHeight)*100;
             locCableQuid.setText(freeDgr.toString());
         
     }
@@ -3102,9 +3104,11 @@ public class formMainController implements Initializable, Observer {
         if (slide_anchor) {
             locTrayAnchor.setPrefWidth(SLIDE_ANCHOR_OPEN);
             locProjectAnchor.setPrefWidth(SLIDE_ANCHOR_PROJECT);
+            locLabelProjectName.setText("ОТКРЫТЬ проект");
         } else {
             locTrayAnchor.setPrefWidth(SLIDE_ANCHOR_CLOSE);
             locProjectAnchor.setPrefWidth(SLIDE_ANCHOR_OPEN);
+            locLabelProjectName.setText("ЗАКРЫТЬ проект");
         }
         slide_anchor = !slide_anchor;
     }

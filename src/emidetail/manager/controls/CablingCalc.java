@@ -40,6 +40,9 @@ public class CablingCalc {
     public Float width;
     public Float height;
     
+    public Float swidth;
+    public Float sheight;
+    
     private int level = 1;
     private int dataindex = -1;
     private int index = 0;
@@ -142,8 +145,8 @@ public class CablingCalc {
                 float ht = res1.getH();
                 //width = wt/1.4f;
                 //height = ht*1.4f;
-                widths.add(wt/1.1f);
-                heights.add(ht*1.1f);
+                widths.add(wt);
+                heights.add(ht);
                  
  
             }
@@ -160,13 +163,19 @@ public class CablingCalc {
                     
                     count_type4++;
                 }
-                height += heights.get(ii);
+                if (heights.get(ii) > height)
+                    height = heights.get(ii);
             }
+            swidth = width/1.4f;
             
-            height = height/(widths.size()-1);
-            if (height < max_height) height = max_height;
+            sheight = height/1.2f;
+            if (height < max_height) {
+                height = max_height*1.1f;
+            } else {
+                height = height/1.1f;
+            }
             if (count_type4 > 1) {
-                height = max_height;
+                height = max_height*1.2f;
             }
             
             dataclear = false;
@@ -186,6 +195,12 @@ public class CablingCalc {
         diametrs = new ArrayList<Float>();
         counts = new ArrayList<Integer>();
         types = new ArrayList<Integer>();
+        widths.clear();
+        heights.clear();
+        
+        trayWidth = 0;
+        trayHeight = 0;
+        
         dataindex = -1;
         level = 1;
         index = 0;
@@ -302,6 +317,8 @@ public class CablingCalc {
             Gabarit res = calcMethod(types.get(dataindex), dataindex);
             width = res.getW();
             height = res.getH();
+            swidth = width/1.4f;
+            sheight = height/1.2f;
         }
         
         boolean isfind = false;

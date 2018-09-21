@@ -847,7 +847,7 @@
                            <children>
                               <Pane accessibleRole="CONTEXT_MENU" layoutX="-7.0" minWidth="42.0" onMouseClicked="#handleShowProject" onMouseMoved="#handleNotifProject" prefHeight="700.0" prefWidth="48.0">
                                  <children>
-                                    <Label alignment="CENTER" contentDisplay="TEXT_ONLY" ellipsisString="Показать проект" layoutX="5.0" layoutY="30.0" lineSpacing="1.0" mouseTransparent="true" nodeOrientation="LEFT_TO_RIGHT" prefHeight="35.0" prefWidth="118.0" rotate="90.0" scaleZ="0.0" text="ОТКРЫТЬ проект" textFill="#3b6987" translateX="-42.0" translateY="38.0">
+                                    <Label fx:id="locLabelProjectName" alignment="CENTER" contentDisplay="TEXT_ONLY" ellipsisString="Показать проект" layoutX="5.0" layoutY="30.0" lineSpacing="1.0" mouseTransparent="true" nodeOrientation="LEFT_TO_RIGHT" prefHeight="35.0" prefWidth="118.0" rotate="90.0" scaleZ="0.0" text="ОТКРЫТЬ проект" textFill="#3b6987" translateX="-42.0" translateY="38.0">
                                        <font>
                                           <Font name="Arial Bold" size="13.0" />
                                        </font>
